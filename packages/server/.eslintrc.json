@@ -1,0 +1,22 @@
+{
+  "root": true,
+  "overrides": [
+    {
+      "files": [
+        "*.d.ts",
+        "**/*.ts",
+        "**/*.tsx"
+      ],
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      },
+      "extends": [
+        "sukka/typescript"
+      ],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-non-null-assertion": "off"
+      }
+    }
+  ]
+}

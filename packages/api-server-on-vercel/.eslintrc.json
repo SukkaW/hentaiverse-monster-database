@@ -1,0 +1,18 @@
+{
+  "root": true,
+  "overrides": [
+    {
+      "files": [
+        "*.d.ts",
+        "**/*.ts",
+        "**/*.tsx"
+      ],
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      },
+      "extends": [
+        "sukka/typescript"
+      ]
+    }
+  ]
+}

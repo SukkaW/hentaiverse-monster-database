@@ -1,0 +1,20 @@
+{
+  "name": "@hvmonsterdb/server",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {},
+  "keywords": [],
+  "author": "Sukka <https://skk.moe>",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "@fastify/cors": "^8.1.0",
+    "deta": "^1.1.0",
+    "dotenv": "^16.0.2",
+    "fastify": "^4.6.0",
+    "fastify-plugin": "^4.2.1"
+  },
+  "devDependencies": {
+    "@vercel/node": "^2.5.20"
+  }
+}

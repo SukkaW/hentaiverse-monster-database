@@ -10,3 +10,4 @@ coverage/
 .turbo
 .parcel-cache
 dist
+.env*
