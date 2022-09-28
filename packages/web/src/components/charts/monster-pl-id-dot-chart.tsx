@@ -13,8 +13,9 @@ import {
 import {
   CanvasRenderer
 } from 'echarts/renderers';
-import type { MonsterDatabase } from '../../types';
 import { useMemo } from 'react';
+
+import type { MonsterInfo } from '@hvmonsterdb/types';
 
 echarts.use(
   [TitleComponent, TooltipComponent, GridComponent, ScatterChart, CanvasRenderer]
@@ -60,7 +61,7 @@ export default function MonsterPLIdDotChart() {
   }, [dataSet, isLoading]);
 }
 
-function buildDataSet(monsters?: MonsterDatabase.MonsterInfo[]) {
+function buildDataSet(monsters?: MonsterInfo[]) {
   if (!monsters) return [];
   return monsters.filter(monster => monster.plvl > 0).map(monster => ([monster.monsterId, monster.plvl] as const));
 }

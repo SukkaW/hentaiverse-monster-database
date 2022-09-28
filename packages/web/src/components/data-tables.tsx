@@ -1,6 +1,6 @@
 import { Grid } from 'gridjs';
 import { useMonsterData } from '../hooks/use-monster-data';
-import type { MonsterDatabase } from '../types';
+import type { MonsterInfo } from '@hvmonsterdb/types';
 import { searchByTrainerAtom } from '../state';
 import { useAtomValue } from 'jotai';
 
@@ -10,7 +10,7 @@ import { useEffect, useMemo, useRef } from 'react';
 
 type DataTablesTColumn = Tuple<{
   name: string,
-  id: keyof MonsterDatabase.MonsterInfo
+  id: keyof MonsterInfo
   sort?: boolean,
   width?: string
 }, 16>;

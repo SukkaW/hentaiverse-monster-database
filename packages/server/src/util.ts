@@ -1,10 +1,8 @@
-import { type MonsterInfo } from './types';
+import type { MonsterInfo } from '@hvmonsterdb/types';
 
 const VALID_MONSTER_CLASS = new Set(['Arthropod', 'Avion', 'Beast', 'Celestial', 'Daimon', 'Dragonkin', 'Elemental', 'Giant', 'Humanoid', 'Mechanoid', 'Reptilian', 'Sprite', 'Undead', 'Common', 'Rare', 'Legendary', 'Ultimate']);
 
 const VALID_MONSTER_ATTACK = new Set(['Piercing', 'Crushing', 'Slashing', 'Fire', 'Cold', 'Wind', 'Elec', 'Holy', 'Dark', 'Void']);
-
-import { Deta } from 'deta';
 
 export function validateMonsterDataInterface(data?: MonsterInfo): data is MonsterInfo {
   if (
@@ -30,8 +28,6 @@ export function getMonsterDatabaseCompatibleDate() {
   return `${date.getUTCFullYear()}-${padNumber(date.getUTCMonth() + 1)}-${padNumber(date.getUTCDate())}`;
 }
 
-const project = Deta(process.env.DETA_PROJECT_KEY);
-
 const validMonsterStatus = (prevMonsterData: MonsterInfo, newMonsterData: MonsterInfo) => {
   if (
     prevMonsterData.monsterId === newMonsterData.monsterId
@@ -48,17 +44,18 @@ const validMonsterStatus = (prevMonsterData: MonsterInfo, newMonsterData: Monste
   return false;
 };
 
+// You can replace "./adapter/deta" with your own adapter, as long
+// as it exports two methods: getMonsterUsingId and updateMonster.
+import { getMonsterUsingId, updateMonster } from './adapter/deta';
+
 export async function putMonsterDataToDatabase(data: MonsterInfo) {
   if (typeof process.env.DETA_PROJECT_KEY === 'string') {
-    const db = project.Base(data.trainer === 'Isekai' ? 'isekai' : 'persistent');
-
-    const existedMonster = await db.get(String(data.monsterId));
+    const existedMonster = await getMonsterUsingId(data.monsterId, data.trainer === 'Isekai');
     if (existedMonster) {
-      if (!validMonsterStatus(existedMonster as any, data)) {
+      if (!validMonsterStatus(existedMonster, data)) {
         return;
       }
     }
-
-    return db.put(data as any, String(data.monsterId));
+    return updateMonster(data, data.trainer === 'Isekai');
   }
 }

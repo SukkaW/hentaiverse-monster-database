@@ -1,6 +1,6 @@
 import type { FastifySchema, FastifyPluginAsync } from 'fastify';
 import fastifyCors from '@fastify/cors';
-import { getMonsterDatabaseCompatibleDate, validateMonsterDataInterface } from './util';
+import { getMonsterDatabaseCompatibleDate, putMonsterDataToDatabase, validateMonsterDataInterface } from './util';
 
 /**
  * This is the entry point of the application. Everything in fastify is a fastify plugin.
@@ -51,12 +51,10 @@ export const app: FastifyPluginAsync = async (fastify) => {
 
           if (validateMonsterDataInterface(data)) {
             data.lastUpdate = getMonsterDatabaseCompatibleDate();
-            // await putMonsterDataToDatabase(data);
+            await putMonsterDataToDatabase(data);
           }
         }
-      } catch {
-        /* */
-      }
+      } catch { /* */ }
 
       // we simply swallow error (if any) and always return 200
       return {

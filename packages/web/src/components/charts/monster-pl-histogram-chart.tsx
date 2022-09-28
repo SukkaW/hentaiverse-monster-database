@@ -1,6 +1,8 @@
 import { useMonsterData } from '../../hooks/use-monster-data';
 import { ReactEchart } from '../react-echart';
 
+import type { MonsterInfo } from '@hvmonsterdb/types';
+
 import * as echarts from 'echarts/core';
 import {
   TitleComponent,
@@ -13,7 +15,6 @@ import {
 import {
   CanvasRenderer
 } from 'echarts/renderers';
-import type { MonsterDatabase } from '../../types';
 import { useMemo } from 'react';
 
 echarts.use(
@@ -75,7 +76,7 @@ export default function MonsterPLHistogramChart() {
   }, [dataBin, isLoading]);
 }
 
-function buildDataSet(monsters?: MonsterDatabase.MonsterInfo[]) {
+function buildDataSet(monsters?: MonsterInfo[]) {
   if (!monsters) return [];
 
   const plArr = monsters.filter(monster => monster.plvl > 0).map(monster => monster.plvl) ?? [];

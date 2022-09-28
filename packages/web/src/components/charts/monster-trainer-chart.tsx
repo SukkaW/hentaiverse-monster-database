@@ -1,6 +1,7 @@
 import { useMonsterData } from '../../hooks/use-monster-data';
 import { ReactEchart } from '../react-echart';
-import type { MonsterDatabase } from '../../types';
+
+import type { MonsterInfo } from '@hvmonsterdb/types';
 
 import * as echarts from 'echarts/core';
 import {
@@ -92,7 +93,7 @@ export default function MonsterTrainerChart() {
   }, [dataSet, isLoading]);
 }
 
-function buildDataSet(monsters?: MonsterDatabase.MonsterInfo[]): { name: string, value: number }[] {
+function buildDataSet(monsters?: MonsterInfo[]): { name: string, value: number }[] {
   if (!monsters) {
     return [];
   }

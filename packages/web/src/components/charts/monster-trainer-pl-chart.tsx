@@ -1,6 +1,7 @@
 import { useMonsterData } from '../../hooks/use-monster-data';
 import { ReactEchart } from '../react-echart';
-import type { MonsterDatabase } from '../../types';
+
+import type { MonsterInfo } from '@hvmonsterdb/types';
 
 import * as echarts from 'echarts/core';
 import {
@@ -105,7 +106,7 @@ export default function MonsterTrainerPLChart() {
   }, [dataSet, isLoading]);
 }
 
-function buildDataSet(monsters?: MonsterDatabase.MonsterInfo[]): {
+function buildDataSet(monsters?: MonsterInfo[]): {
   trainerNames: string[],
   trainerPls: number[][]
 } {

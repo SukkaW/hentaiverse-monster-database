@@ -1,5 +1,6 @@
 import { useMonsterData } from '../../hooks/use-monster-data';
-import type { MonsterDatabase } from '../../types';
+
+import type { MonsterInfo } from '@hvmonsterdb/types';
 
 import { ReactEchart } from '../react-echart';
 
@@ -21,7 +22,7 @@ echarts.use(
   [TitleComponent, TooltipComponent, BarChart, GridComponent, CanvasRenderer]
 );
 
-const processMonsterData = (monsters?: MonsterDatabase.MonsterInfo[]): { name: string, value: number }[] => {
+const processMonsterData = (monsters?: MonsterInfo[]): { name: string, value: number }[] => {
   if (!monsters) return [];
 
   const data: Record<string, number> = {};

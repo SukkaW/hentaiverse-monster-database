@@ -1,6 +1,7 @@
 import { useMonsterData } from '../../hooks/use-monster-data';
 import { ReactEchart } from '../react-echart';
-import type { MonsterDatabase } from '../../types';
+
+import type { MonsterInfo } from '@hvmonsterdb/types';
 
 import * as echarts from 'echarts/core';
 import {
@@ -65,7 +66,7 @@ export default function MonsterScanChart() {
   }, [dataSet, isLoading]);
 }
 
-function buildDataSet(monsters?: MonsterDatabase.MonsterInfo[]): { date: string[], value: number[] } {
+function buildDataSet(monsters?: MonsterInfo[]): { date: string[], value: number[] } {
   const unsortedDataSet: Record<string, number> = {};
 
   monsters?.forEach((monster) => {
