@@ -1,0 +1,11 @@
+{
+  "root": true,
+  "overrides": [
+    {
+      "files": [
+        "*.js"
+      ],
+      "extends": "sukka/node"
+    }
+  ]
+}

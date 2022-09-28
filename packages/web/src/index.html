@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HentaiVerse Monster Database</title>
+  <meta name="format-detection" content="telephone=no">
+  <style>
+    #app:empty::before {
+      display: block;
+      content: "Loading...";
+      animation: loading-fadein 1.6s infinite;
+      animation-delay: 0.4s;
+      animation-fill-mode: forwards;
+      font-size: 2rem;
+      font-weight: 300;
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      right: 0;
+      text-align: center;
+      top: 200px;
+      z-index: -1;
+    }
+
+    @keyframes loading-fadein {
+      0% {
+        opacity: 0
+      }
+
+      50% {
+        opacity: .5
+      }
+
+      to {
+        opacity: 0
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="index.tsx" type="module"></script>
+</body>

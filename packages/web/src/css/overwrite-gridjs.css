@@ -1,0 +1,18 @@
+/* ========== Override GridJS style */
+
+td.gridjs-td {
+  padding: 8px 12px
+}
+
+th.gridjs-th {
+  padding: 10px 12px;
+  box-sizing: initial;
+}
+
+th.gridjs-th-sort {
+  line-height: 24px;
+}
+
+.gridjs-table {
+  width: 100%;
+}

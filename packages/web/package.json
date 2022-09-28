@@ -1,0 +1,36 @@
+{
+  "name": "web",
+  "version": "0.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "clean": "pnpx rimraf dist && pnpx rimraf .parcel-cache",
+    "prebuild": "pnpx rimraf dist",
+    "build": "parcel build src/index.html --no-source-maps",
+    "build:report": "parcel build ./src/index.html --no-source-maps --reporter @parcel/reporter-bundle-analyzer",
+    "dev": "parcel serve src/index.html",
+    "eslint": "eslint . --ext js,jsx,ts,tsx --max-warnings=0 --config .eslintrc.js --no-eslintrc"
+  },
+  "author": "Sukka <https://skk.moe>",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "@headlessui/react": "^1.7.2",
+    "clsx": "^1.2.1",
+    "echarts": "^5.4.0",
+    "gridjs": "^5.1.0",
+    "jotai": "^1.8.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "swr": "2.0.0-beta.7"
+  },
+  "devDependencies": {
+    "@parcel/reporter-bundle-analyzer": "^2.7.0",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "buffer": "^6.0.3",
+    "parcel": "^2.7.0",
+    "postcss": "^8.4.16",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.1.8"
+  }
+}

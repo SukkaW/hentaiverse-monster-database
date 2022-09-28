@@ -1,0 +1,33 @@
+{
+  "name": "hentaiverse-monster-database-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "eslint": "turbo run eslint",
+    "dev": "turbo run dev"
+  },
+  "keywords": [],
+  "author": "Sukka <https://skk.moe>",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.38.1",
+    "@typescript-eslint/parser": "^5.38.1",
+    "eslint": "^8.24.0",
+    "eslint-config-sukka": "^1.6.16",
+    "eslint-import-resolver-typescript": "^3.5.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-react": "^7.31.8",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "rimraf": "^3.0.2",
+    "turbo": "^1.5.4",
+    "typescript": "^4.8.4"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
