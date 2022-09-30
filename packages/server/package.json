@@ -15,6 +15,7 @@
     "fluent-json-schema": "^3.1.0"
   },
   "devDependencies": {
-    "@hvmonsterdb/types": "workspace:*"
+    "@hvmonsterdb/types": "workspace:*",
+    "@types/node": "^18.7.23"
   }
 }
