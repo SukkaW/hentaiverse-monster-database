@@ -8,7 +8,7 @@
         "**/*.tsx"
       ],
       "parserOptions": {
-        "project": "./tsconfig.json"
+        "project": "./packages/api-server-on-vercel/tsconfig.json"
       },
       "extends": [
         "sukka/typescript"

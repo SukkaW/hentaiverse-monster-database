@@ -8,11 +8,23 @@
         "**/*.tsx"
       ],
       "parserOptions": {
-        "project": "./packages/server/tsconfig.json"
+        "project": "./packages/data/tsconfig.json",
+        "ecmaVersion": 2020,
+        "sourceType": "module"
       },
       "extends": [
         "sukka/typescript"
       ],
+      "settings": {
+        "node": {
+          "tryExtensions": [
+            ".js",
+            ".json",
+            ".node",
+            ".ts"
+          ]
+        }
+      },
       "rules": {
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-non-null-assertion": "off"
