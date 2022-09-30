@@ -49,20 +49,16 @@ importers:
     specifiers:
       '@fastify/cors': ^8.1.0
       '@hvmonsterdb/types': workspace:*
-      '@vercel/node': ^2.5.20
       deta: ^1.1.0
       dotenv: ^16.0.2
       fastify: ^4.6.0
-      fastify-plugin: ^4.2.1
     dependencies:
       '@fastify/cors': 8.1.0
       deta: 1.1.0
       dotenv: 16.0.2
       fastify: 4.6.0
-      fastify-plugin: 4.2.1
     devDependencies:
       '@hvmonsterdb/types': link:../types
-      '@vercel/node': 2.5.20
 
   packages/types:
     specifiers: {}
