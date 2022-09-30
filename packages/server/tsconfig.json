@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es2018",
     "lib": [
       "esnext"
     ],
+    "module": "commonjs",
     "allowJs": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -19,6 +20,7 @@
     "**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist"
   ]
 }
