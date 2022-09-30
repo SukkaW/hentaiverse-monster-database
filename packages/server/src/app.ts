@@ -30,7 +30,7 @@ const ALLOWED_REFERERS = [
 
 export const app: FastifyPluginAsync = async (fastify) => {
   fastify.register(fastifyCors, {
-    origin: ALLOWED_REFERERS,
+    origin: ALLOWED_REFERERS.map(host => `https://${host}`),
     methods: ['GET', 'OPTIONS', 'PATCH', 'DELETE', 'POST', 'PUT'],
     maxAge: 7200 // A 7200 seconds limit is defeined by WHATWG Fetch Standard.
   });
