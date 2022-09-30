@@ -5,9 +5,12 @@ import { promises as fsPromises } from 'fs';
 import progress from 'cli-progress';
 
 import dotenv from 'dotenv';
+import findUp from 'find-up';
 
 (async () => {
-  dotenv.config();
+  if (typeof process.env.DETA_PROJECT_KEY !== 'string') {
+    dotenv.config({ path: findUp.sync('.env') });
+  }
 
   if (typeof process.env.DETA_PROJECT_KEY !== 'string') {
     throw new Error('DETA_PROJECT_KEY is not defined!');

@@ -2,6 +2,7 @@
 import { Deta } from 'deta';
 import path from 'path';
 import { promises as fsPromises } from 'fs';
+import findUp from 'find-up';
 
 import * as dotenv from 'dotenv';
 
@@ -11,7 +12,7 @@ import type Base from 'deta/dist/types/base';
 
 (async () => {
   if (typeof process.env.DETA_PROJECT_KEY !== 'string') {
-    dotenv.config();
+    dotenv.config({ path: findUp.sync('.env') });
   }
 
   if (typeof process.env.DETA_PROJECT_KEY !== 'string') {

@@ -1,13 +1,15 @@
 import * as dotenv from 'dotenv';
-import { app } from './app';
+import findUp from 'find-up';
 import Fastify from 'fastify';
+
+import { app } from './app';
 
 /**
  * This is an example of how you would normally start your own server.
  */
 
 if (typeof process.env.DETA_PROJECT_KEY !== 'string') {
-  dotenv.config();
+  dotenv.config({ path: findUp.sync('.env') });
 }
 
 let port = 3000;

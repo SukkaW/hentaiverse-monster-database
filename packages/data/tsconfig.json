@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": [
+      "esnext"
+    ],
+    "allowJs": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "incremental": true
+  },
+  "include": [
+    "tools/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

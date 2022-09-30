@@ -1,1 +1,0 @@
-../should-vercel-build.sh
