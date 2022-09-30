@@ -1,7 +1,3 @@
-import type { FastifySchema, FastifyPluginAsync } from 'fastify';
-import fastifyCors from '@fastify/cors';
-import { getMonsterDatabaseCompatibleDate, putMonsterDataToDatabase, validateMonsterDataInterface } from './util';
-
 /**
  * This is the entry point of the application. Everything in fastify is a fastify plugin.
  * The reason behind the "plugin" approach is that we can:
@@ -13,11 +9,17 @@ import { getMonsterDatabaseCompatibleDate, putMonsterDataToDatabase, validateMon
  * More details see https://www.fastify.io/docs/latest/Reference/Encapsulation/
  */
 
+import type { FastifySchema, FastifyPluginAsync } from 'fastify';
+import fastifyCors from '@fastify/cors';
+import { getMonsterDatabaseCompatibleDate, putMonsterDataToDatabase, validateMonsterDataInterface } from './util';
+import S from 'fluent-json-schema';
+
+const sharedResponseSchema = S.object().prop('code', S.number()).prop('msg', S.string());
+
 const schema: FastifySchema = {
   response: {
-    405: {
-      code: 'number'
-    }
+    405: sharedResponseSchema,
+    200: sharedResponseSchema
   }
 };
 
@@ -34,14 +36,14 @@ export const app: FastifyPluginAsync = async (fastify) => {
   });
 
   fastify.all(
-    '/monsterdata',
+    '/api/monsterdata',
     { schema },
     async (request, response) => {
       if (request.method !== 'PUT') {
         response.status(405);
         return {
           code: 405,
-          message: `${request.method ?? 'Non PUT'} method is not allowed`
+          msg: `${request.method ?? 'Non PUT'} method is not allowed`
         };
       }
 
@@ -59,7 +61,7 @@ export const app: FastifyPluginAsync = async (fastify) => {
       // we simply swallow error (if any) and always return 200
       return {
         code: 200,
-        message: 'monster data submitted'
+        msg: 'monster data submitted'
       };
     }
   );

@@ -11,7 +11,8 @@
     "@fastify/cors": "^8.1.0",
     "deta": "^1.1.0",
     "dotenv": "^16.0.2",
-    "fastify": "^4.6.0"
+    "fastify": "^4.6.0",
+    "fluent-json-schema": "^3.1.0"
   },
   "devDependencies": {
     "@hvmonsterdb/types": "workspace:*"
