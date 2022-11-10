@@ -27,7 +27,7 @@ export function FilterByTrainerForm() {
   };
 
   return (
-    <form className="max-w-sm absolute right-0 top-6 z-10" action="/" method="get" onSubmit={handleSubmit} onReset={handleReset}>
+    <form className="max-w-md absolute right-0 top-6 z-10" action="/" method="get" onSubmit={handleSubmit} onReset={handleReset}>
       <input className="appearance-none border border-gray-300 rounded-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="search" name="trainer" placeholder="Search by Trainer" value={trainerInputValue} onChange={handleChange} />
       <button className="ml-3 bg-[#5C0D12] text-[#E3E0D1] py-2 px-4 rounded-full focus:outline-none focus:shadow-outline" type="button">
         Search

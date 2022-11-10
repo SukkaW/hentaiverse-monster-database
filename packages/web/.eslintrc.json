@@ -9,7 +9,7 @@
       "files": ["*.ts", "*.tsx"],
       "extends": ["sukka/react", "sukka/typescript"],
       "parserOptions": {
-        "project": "./packages/server/tsconfig.json"
+        "project": "./packages/web/tsconfig.json"
       }
     }
   ]
