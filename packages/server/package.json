@@ -10,10 +10,10 @@
   "author": "Sukka <https://skk.moe>",
   "license": "GPL-3.0",
   "dependencies": {
-    "@fastify/cors": "^8.1.0",
+    "@fastify/cors": "^8.2.0",
     "deta": "^1.1.0",
-    "dotenv": "^16.0.2",
-    "fastify": "^4.6.0",
+    "dotenv": "^16.0.3",
+    "fastify": "^4.10.2",
     "find-up": "5.0.0",
     "fluent-json-schema": "^3.1.0"
   },
@@ -21,7 +21,7 @@
     "@hvmonsterdb/types": "workspace:*",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^14.1.0",
-    "@types/node": "^18.7.23",
+    "@types/node": "^18.11.9",
     "rollup": "^2.79.1",
     "rollup-plugin-swc3": "^0.6.0"
   }
