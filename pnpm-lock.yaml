@@ -107,7 +107,6 @@ importers:
       '@parcel/reporter-bundle-analyzer': ^2.8.0
       '@types/react': ^18.0.25
       '@types/react-dom': ^18.0.9
-      buffer: ^6.0.3
       clsx: ^1.2.1
       echarts: ^5.4.0
       gridjs: ^5.1.0
@@ -124,7 +123,7 @@ importers:
       clsx: 1.2.1
       echarts: 5.4.0
       gridjs: 5.1.0
-      jotai: 1.10.0
+      jotai: 1.10.0_react@18.2.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       swr: 2.0.0-beta.7_react@18.2.0
@@ -133,7 +132,6 @@ importers:
       '@parcel/reporter-bundle-analyzer': 2.8.0
       '@types/react': 18.0.25
       '@types/react-dom': 18.0.9
-      buffer: 6.0.3
       parcel: 2.8.0_postcss@8.4.19
       postcss: 8.4.19
       process: 0.11.10
@@ -1800,6 +1798,7 @@ packages:
 
   /base64-js/1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
+    dev: false
 
   /binary-extensions/2.2.0:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
@@ -1843,6 +1842,7 @@ packages:
     dependencies:
       base64-js: 1.5.1
       ieee754: 1.2.1
+    dev: false
 
   /builtin-modules/3.3.0:
     resolution: {integrity: sha512-zhaCDicdLuWN5UbN5IMnFqNMhNfo919sH85y2/ea+5Yg9TsTkeZxpL+JLbp6cgYFS4sRLp3YV4S6yDuqVWHYOw==}
@@ -3262,6 +3262,7 @@ packages:
 
   /ieee754/1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
+    dev: false
 
   /ignore/5.2.1:
     resolution: {integrity: sha512-d2qQLzTJ9WxQftPAuEQpSPmKqzxePjzVbpAVv62AQ64NTL+wR4JkrVqR/LqFsFEUsHDAiId52mJteHDFuDkElA==}
@@ -3459,7 +3460,7 @@ packages:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
     dev: true
 
-  /jotai/1.10.0:
+  /jotai/1.10.0_react@18.2.0:
     resolution: {integrity: sha512-3Q8kQU3Ktds+80Ku4dVcvnwSXEcK0Fg0b6mC1+4wz3rmF64lOGNUySKXQ4njvYCWodR8bw2HygOKYSYkHxQQmA==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
@@ -3473,6 +3474,7 @@ packages:
       jotai-valtio: '*'
       jotai-xstate: '*'
       jotai-zustand: '*'
+      react: '>=16.8'
     peerDependenciesMeta:
       '@babel/core':
         optional: true
@@ -4673,6 +4675,7 @@ packages:
   /tailwindcss/3.2.4_postcss@8.4.19:
     resolution: {integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==}
     engines: {node: '>=12.13.0'}
+    hasBin: true
     peerDependencies:
       postcss: ^8.0.9
     dependencies:
@@ -4949,6 +4952,7 @@ packages:
 
   /update-browserslist-db/1.0.10_browserslist@4.21.4:
     resolution: {integrity: sha512-OztqDenkfFkbSG+tRxBeAnCVPckDBcvibKd35yDONx6OU8N7sqgwc7rCbkJ/WcYtVRZ4ba68d6byhC21GFh7sQ==}
+    hasBin: true
     peerDependencies:
       browserslist: '>= 4.21.0'
     dependencies:

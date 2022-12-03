@@ -30,5 +30,8 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "alias": {
+    "buffer": false
+  }
 }
