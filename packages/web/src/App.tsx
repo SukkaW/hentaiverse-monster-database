@@ -9,6 +9,8 @@ import { Row, Col } from './components/row-col';
 import type { MonsterDatabase } from './types';
 import { IsekaiSwitch } from './components/isekai-switch';
 import { IsekaiProvider, useIsIsekai } from './components/isekai-state';
+import { useHasAdBlockEnabled } from './hooks/use-detect-adblock';
+import { AntiAdBlock } from './components/anti-adblock';
 
 const MonsterAttackBarChart = lazy(() => import('./components/charts/monster-attack-bar-chart'));
 const MonsterClassBarChart = lazy(() => import('./components/charts/monster-class-bar-chart'));
@@ -44,6 +46,8 @@ export function App() {
     return result;
   }, [] as MonsterDatabase.Element[][]), []);
 
+  useHasAdBlockEnabled();
+
   return (
     <StrictMode>
       <IsekaiProvider>
@@ -78,85 +82,75 @@ export function App() {
                 }
               </Tab.Panel>
               <Tab.Panel>
-                {
-                  () => {
-                    return (
+                {() => (
+                  <AntiAdBlock>
+                    <Row>
+                      <Col className="h-[500px]">
+                        <Suspense fallback={<div>Loading...</div>}>
+                          <MonsterAttackBarChart />
+                        </Suspense>
+                      </Col>
+                      <Col className="h-[500px]">
+                        <Suspense fallback={<div>Loading...</div>}>
+                          <MonsterClassBarChart />
+                        </Suspense>
+                      </Col>
+                      <Col className="h-[500px]">
+                        <Suspense fallback={<div>Loading...</div>}>
+                          <MonsterClassPieChart />
+                        </Suspense>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className="h-[500px]">
+                        <Suspense fallback={<div>Loading...</div>}>
+                          <MonsterPLHistogramChart />
+                        </Suspense>
+                      </Col>
+                      <Col className="h-[500px]">
+                        <Suspense fallback={<div>Loading...</div>}>
+                          <MonsterPLIdDotChart />
+                        </Suspense>
+                      </Col>
+                    </Row>
+                    {!isIsekai && (
                       <>
                         <Row>
                           <Col className="h-[500px]">
                             <Suspense fallback={<div>Loading...</div>}>
-                              <MonsterAttackBarChart />
-                            </Suspense>
-                          </Col>
-                          <Col className="h-[500px]">
-                            <Suspense fallback={<div>Loading...</div>}>
-                              <MonsterClassBarChart />
-                            </Suspense>
-                          </Col>
-                          <Col className="h-[500px]">
-                            <Suspense fallback={<div>Loading...</div>}>
-                              <MonsterClassPieChart />
+                              <MonsterTrainerChart />
                             </Suspense>
                           </Col>
                         </Row>
                         <Row>
                           <Col className="h-[500px]">
                             <Suspense fallback={<div>Loading...</div>}>
-                              <MonsterPLHistogramChart />
-                            </Suspense>
-                          </Col>
-                          <Col className="h-[500px]">
-                            <Suspense fallback={<div>Loading...</div>}>
-                              <MonsterPLIdDotChart />
+                              <MonsterTrainerPLChart />
                             </Suspense>
                           </Col>
                         </Row>
-                        {
-                          !isIsekai && (
-                            <>
-                              <Row>
-                                <Col className="h-[500px]">
-                                  <Suspense fallback={<div>Loading...</div>}>
-                                    <MonsterTrainerChart />
-                                  </Suspense>
-                                </Col>
-                              </Row>
-                              <Row>
-                                <Col className="h-[500px]">
-                                  <Suspense fallback={<div>Loading...</div>}>
-                                    <MonsterTrainerPLChart />
-                                  </Suspense>
-                                </Col>
-                              </Row>
-                            </>
-                          )
-                        }
-                        <Row>
-                          <Col className="h-[500px]">
-                            <Suspense fallback={<div>Loading...</div>}>
-                              <MonsterScanChart />
-                            </Suspense>
-                          </Col>
-                        </Row>
-                        {
-                          elementsGroup.map((elements) => (
-                            <Row key={elements.join()}>
-                              {
-                                elements.map((element) => (
-                                  <Col className="h-[500px]" key={element}>
-                                    <Suspense fallback={<div>Loading...</div>}>
-                                      <MonsterMitigationChart type={element} />
-                                    </Suspense>
-                                  </Col>
-                                ))
-                              }
-                            </Row>
-                          ))
-                        }
                       </>
-                    );
-                  }
-                }
+                    )}
+                    <Row>
+                      <Col className="h-[500px]">
+                        <Suspense fallback={<div>Loading...</div>}>
+                          <MonsterScanChart />
+                        </Suspense>
+                      </Col>
+                    </Row>
+                    {elementsGroup.map((elements) => (
+                      <Row key={elements.join()}>
+                        {elements.map((element) => (
+                          <Col className="h-[500px]" key={element}>
+                            <Suspense fallback={<div>Loading...</div>}>
+                              <MonsterMitigationChart type={element} />
+                            </Suspense>
+                          </Col>
+                        ))}
+                      </Row>
+                    ))}
+                  </AntiAdBlock>
+                )}
               </Tab.Panel>
             </Tab.Panels>
           </Tab.Group>
