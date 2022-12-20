@@ -8,11 +8,11 @@ HentaiVerse Monster Database is a community-built project for indexing player-cr
 
 ## Introduction
 
-The first HentaiVerse Monster Database was created by a player (Jenga) years ago. It is then operated and maintained by another player (decondelite). It was also integrated into the commonly used enhancing script *Monsterbation* to show the monster's details during the battle. The database server and the website stops operating at the end of 2020.
+The first HentaiVerse Monster Database was created by a player (Jenga) years ago. It was then operated and maintained by another player (decondelite). It was also integrated into the commonly used in-battle enhancing script *Monsterbation* to show monsters' details during the battle. The database server and the website stops operating at the end of 2020.
 
-The second HentaiVerse Monster Database was created by another player (zhenterzzf) in 2021. I help to create the new website that features data grid and chart, as well as the dedicated monster database userscript. The server stopped operating months later.
+The second HentaiVerse Monster Database was created by another player (zhenterzzf) in 2021. I help to create the new website that features data table and charts, as well as the dedicated monster database userscript. The server stopped operating months later.
 
-After the second HentaiVerse Monster Database stopped operating, I start to rebuild a new monster database project from scratch, while matains the backward compatibility with Jenga and zhenterzzf's database.
+After the second HentaiVerse Monster Database stopped operating, I start to rebuild a new monster database project from scratch, while mataining the backward compatibility with Jenga and zhenterzzf's database.
 
 ## Design Principles
 
@@ -34,7 +34,7 @@ HentaiVerse Monster Database uses the monorepo approach to manage multiple proje
 
 ### Website (web)
 
-Also known as the https://hv-monster.skk.moe. The website downloads the data from another domain, `hv-monsterdb-data.skk.moe` (which I will explain later), and render the data grid and charts in the browser. It is hosted on the [Cloudflare Pages](https://pages.cloudflare.com) for free.
+Also known as the https://hv-monster.skk.moe. The website downloads the data from another domain, `hv-monsterdb-data.skk.moe` (which I will explain later), and render the data tables and charts in the browser. It is hosted on the [Cloudflare Pages](https://pages.cloudflare.com) for free.
 
 [`/packages/web`](./packages/web/) holds the source code of the website. It is a static website built with [React](https://reactjs.org), [TailwindCSS](https://tailwindcss.com), [SWR](https://swr.vercel.app), [Grid.js](https://gridjs.io/) and [ECharts](https://echarts.apache.org/en/index.html).
 
@@ -75,7 +75,7 @@ The GitHub repository also serves the purpose of backup and archive.
 
 ### Userscript
 
-The HentaiVerse player can install a userscript to improve the user experience of the project. The userscript is hosted in a dedicated GitHub repository [SukkaW/hv-monsterdb-userscript](https://github.com/SukkaW/hv-monsterdb-userscript). It is built with [Million Virtual DOM](https://millionjs.org) and [nanostore](https://github.com/nanostore/nanostore).
+The HentaiVerse player can install a userscript to improve the user experience of the project. The source code of the userscript is hosted in a dedicated GitHub repository [SukkaW/hv-monsterdb-userscript](https://github.com/SukkaW/hv-monsterdb-userscript). It is built with [Million Virtual DOM](https://millionjs.org) and [nanostore](https://github.com/nanostore/nanostore).
 
 The script will update the local database from `https://hv-monsterdb-data.skk.moe` once per day, typically at the Dawn of a New Day event out of the battle. During the battle, the script will automatically show monster information on the page. All information comes from the local database, with no request to the server involved. Every time the player scan a monster, the script will automatically parse Battle Log, update the local database, and send the scan result to the submit endpoint. The userscript also exposes [a set of APIs](https://suka.js.org/hv-monsterdb-userscript/) to work with other HentaiVerse userscripts.
 
