@@ -10,6 +10,7 @@
  */
 
 import type { FastifySchema, FastifyPluginAsync } from 'fastify';
+import type { FastifyCorsOptions } from '@fastify/cors';
 import fastifyCors from '@fastify/cors';
 import { getMonsterDatabaseCompatibleDate, putMonsterDataToDatabase, validateMonsterDataInterface } from './util';
 import S from 'fluent-json-schema';
@@ -28,12 +29,14 @@ const ALLOWED_REFERERS = [
   'alt.hentaiverse.org'
 ];
 
+const fastifyCorsOption: FastifyCorsOptions = {
+  origin: ALLOWED_REFERERS.map(host => `https://${host}`),
+  methods: ['GET', 'OPTIONS', 'PATCH', 'DELETE', 'POST', 'PUT'],
+  maxAge: 7200 // A 7200 seconds limit is defeined by WHATWG Fetch Standard.
+};
+
 export const app: FastifyPluginAsync = async (fastify) => {
-  fastify.register(fastifyCors, {
-    origin: ALLOWED_REFERERS.map(host => `https://${host}`),
-    methods: ['GET', 'OPTIONS', 'PATCH', 'DELETE', 'POST', 'PUT'],
-    maxAge: 7200 // A 7200 seconds limit is defeined by WHATWG Fetch Standard.
-  });
+  fastify.register(fastifyCors, fastifyCorsOption);
 
   fastify.all(
     '/api/monsterdata',
