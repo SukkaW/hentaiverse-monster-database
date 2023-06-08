@@ -6,7 +6,7 @@ import { defineConfig } from 'rollup';
 
 import * as pkgJson from './package.json';
 
-const option = defineConfig({
+export default defineConfig({
   input: 'src/index.ts',
   output: {
     file: 'dist/index.js',
@@ -14,19 +14,10 @@ const option = defineConfig({
   },
   external: Object.keys(pkgJson.dependencies),
   plugins: [
-    commonjs({
-      esmExternals: true
-    }),
-    nodeResolve({
-      exportConditions: ['import', 'require', 'default']
-    }),
+    commonjs({ esmExternals: true }),
+    nodeResolve({ exportConditions: ['import', 'require', 'default'] }),
     swc(defineRollupSwcOption({
-      jsc: {
-        externalHelpers: false,
-        target: 'es2018'
-      }
+      jsc: { externalHelpers: false, target: 'es2019' }
     }))
   ]
 });
-
-export default option;

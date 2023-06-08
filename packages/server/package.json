@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "build": "rollup --configPlugin swc3 -c rollup.config.ts"
+    "build": "rollup --configPlugin swc3 -c rollup.config.ts --bundleConfigAsCjs"
   },
   "keywords": [],
   "author": "Sukka <https://skk.moe>",
