@@ -10,9 +10,9 @@
   "author": "Sukka <https://skk.moe>",
   "license": "GPL-3.0",
   "dependencies": {
-    "cli-progress": "^3.11.2",
+    "cli-progress": "^3.12.0",
     "deta": "^1.1.0",
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.1.4",
     "find-up": "5.0.0",
     "p-retry": "4.6.2"
   },
