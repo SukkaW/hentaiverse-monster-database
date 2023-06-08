@@ -1,10 +1,9 @@
-import { useAtom } from 'jotai';
 import { useState } from 'react';
-import { searchByTrainerAtom } from '../state';
+import { useSetTrainer, useTrainer } from './search-by-trainer-state';
 
 export function FilterByTrainerForm() {
-  const [trainerName, setTrainerName] = useAtom(searchByTrainerAtom);
-  const [trainerInputValue, setTrainerInputValue] = useState(trainerName);
+  const setTrainerName = useSetTrainer();
+  const [trainerInputValue, setTrainerInputValue] = useState(useTrainer());
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTrainerInputValue(e.target.value);

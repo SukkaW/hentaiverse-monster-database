@@ -1,12 +1,11 @@
 import { Grid } from 'gridjs';
 import { useMonsterData } from '../hooks/use-monster-data';
 import type { MonsterInfo } from '@hvmonsterdb/types';
-import { searchByTrainerAtom } from '../state';
-import { useAtomValue } from 'jotai';
 
 import 'gridjs/dist/theme/mermaid.css';
 import '../css/overwrite-gridjs.css';
 import { useEffect, useMemo, useRef } from 'react';
+import { useTrainer } from './search-by-trainer-state';
 
 type DataTablesTColumn = Tuple<{
   name: string,
@@ -86,7 +85,7 @@ const columns: DataTablesTColumn = [
 export function MonsterDataTable() {
   const { monsters: rawMonsterDatas, isLoading } = useMonsterData();
   const elementRef = useRef<HTMLDivElement>(null);
-  const trainerName = useAtomValue(searchByTrainerAtom);
+  const trainerName = useTrainer();
 
   const data = useMemo<Tuple<string | number, 16>[]>(() => {
     if (rawMonsterDatas) {
