@@ -14,24 +14,24 @@
   "author": "Sukka <https://skk.moe>",
   "license": "GPL-3.0",
   "dependencies": {
-    "@headlessui/react": "^1.7.15",
-    "clsx": "^1.2.1",
-    "echarts": "^5.4.2",
-    "foxact": "^0.2.7",
+    "@headlessui/react": "^1.7.17",
+    "clsx": "^2.0.0",
+    "echarts": "^5.4.3",
+    "foxact": "^0.2.20",
     "gridjs": "^6.0.6",
     "react": "18.3.0-next-353c30252-20221202",
     "react-dom": "18.3.0-next-353c30252-20221202",
-    "swr": "2.1.5"
+    "swr": "2.2.2"
   },
   "devDependencies": {
     "@hvmonsterdb/types": "workspace:*",
-    "@parcel/reporter-bundle-analyzer": "^2.9.1",
-    "@types/react": "^18.2.9",
-    "@types/react-dom": "^18.2.4",
-    "parcel": "^2.9.1",
-    "postcss": "^8.4.24",
+    "@parcel/reporter-bundle-analyzer": "^2.9.3",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "parcel": "^2.9.3",
+    "postcss": "^8.4.29",
     "process": "^0.11.10",
-    "tailwindcss": "^3.3.2"
+    "tailwindcss": "^3.3.3"
   },
   "alias": {
     "buffer": false
