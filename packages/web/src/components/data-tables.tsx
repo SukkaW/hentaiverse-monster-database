@@ -9,7 +9,7 @@ import { useTrainer } from './search-by-trainer-state';
 
 type DataTablesTColumn = Tuple<{
   name: string,
-  id: keyof MonsterInfo
+  id: keyof MonsterInfo,
   sort?: boolean,
   width?: string
 }, 16>;
@@ -87,11 +87,11 @@ export function MonsterDataTable() {
   const elementRef = useRef<HTMLDivElement>(null);
   const trainerName = useTrainer();
 
-  const data = useMemo<Tuple<string | number, 16>[]>(() => {
+  const data = useMemo<Array<Tuple<string | number, 16>>>(() => {
     if (rawMonsterDatas) {
-      const result: Tuple<string | number, 16>[] = [];
+      const result: Array<Tuple<string | number, 16>> = [];
 
-      (trainerName ? rawMonsterDatas?.filter(m => m.trainer.toLowerCase() === trainerName?.toLowerCase()) : rawMonsterDatas)?.forEach(monsterInfo => {
+      (trainerName ? rawMonsterDatas.filter(m => m.trainer.toLowerCase() === trainerName.toLowerCase()) : rawMonsterDatas).forEach(monsterInfo => {
         const row = new Array(16);
         columns.forEach((key, index) => {
           row[index] = monsterInfo[key.id];

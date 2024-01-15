@@ -1,17 +1,17 @@
 {
   "compilerOptions": {
+    "incremental": true,
     "target": "esnext",
     "lib": [
       "esnext"
     ],
-    "allowJs": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "incremental": true
+    "allowJs": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true
   },
   "include": [
     "env.d.ts",

@@ -22,7 +22,7 @@ echarts.use(
   [TitleComponent, TooltipComponent, BarChart, GridComponent, CanvasRenderer]
 );
 
-const processMonsterData = (monsters?: MonsterInfo[]): { name: string, value: number }[] => {
+const processMonsterData = (monsters?: MonsterInfo[]): Array<{ name: string, value: number }> => {
   if (!monsters) return [];
 
   const data: Record<string, number> = {};

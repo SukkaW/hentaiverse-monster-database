@@ -1,37 +1,36 @@
 {
   "name": "@hvmonsterdb/web",
   "version": "0.0.0",
-  "description": "",
   "private": true,
+  "description": "",
   "scripts": {
     "clean": "pnpx rimraf dist && pnpx rimraf .parcel-cache",
     "prebuild": "pnpx rimraf dist",
     "build": "parcel build src/index.html --no-source-maps",
     "build:report": "parcel build ./src/index.html --no-source-maps --reporter @parcel/reporter-bundle-analyzer",
-    "dev": "parcel serve src/index.html",
-    "eslint": "eslint . --ext js,jsx,ts,tsx --max-warnings=0 --config .eslintrc.js --no-eslintrc"
+    "dev": "parcel serve src/index.html"
   },
   "author": "Sukka <https://skk.moe>",
   "license": "GPL-3.0",
   "dependencies": {
-    "@headlessui/react": "^1.7.17",
-    "clsx": "^2.0.0",
+    "@headlessui/react": "^1.7.18",
+    "clsx": "^2.1.0",
     "echarts": "^5.4.3",
-    "foxact": "^0.2.20",
-    "gridjs": "^6.0.6",
+    "foxact": "^0.2.30",
+    "gridjs": "^6.1.0",
     "react": "18.3.0-next-353c30252-20221202",
     "react-dom": "18.3.0-next-353c30252-20221202",
     "swr": "2.2.2"
   },
   "devDependencies": {
     "@hvmonsterdb/types": "workspace:*",
-    "@parcel/reporter-bundle-analyzer": "^2.9.3",
-    "@types/react": "^18.2.21",
-    "@types/react-dom": "^18.2.7",
-    "parcel": "^2.9.3",
-    "postcss": "^8.4.29",
+    "@parcel/reporter-bundle-analyzer": "^2.11.0",
+    "@types/react": "^18.2.47",
+    "@types/react-dom": "^18.2.18",
+    "parcel": "^2.11.0",
+    "postcss": "^8.4.33",
     "process": "^0.11.10",
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.4.1"
   },
   "alias": {
     "buffer": false

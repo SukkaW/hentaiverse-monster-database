@@ -1,14 +1,11 @@
-import type React from 'react';
 import { useState } from 'react';
 import { useHasAdBlockEnabled } from '../hooks/use-detect-adblock';
 
-export const AntiAdBlock = ({ children }: React.PropsWithChildren<unknown>) => {
+export const AntiAdBlock = ({ children }: React.PropsWithChildren) => {
   const [insist, setInsist] = useState(false);
   const hasAdBlockEnabled = useHasAdBlockEnabled();
-  // eslint-disable-next-line react/jsx-no-useless-fragment
-  if (!hasAdBlockEnabled) return <>{children}</>;
-  // eslint-disable-next-line react/jsx-no-useless-fragment
-  if (insist) return <>{children}</>;
+  if (!hasAdBlockEnabled) return children;
+  if (insist) return children;
   return (
     <div>
       <h1>You appear to have ADBlock enabled!</h1>

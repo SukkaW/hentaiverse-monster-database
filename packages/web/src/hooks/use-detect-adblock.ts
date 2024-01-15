@@ -16,14 +16,14 @@ export const useHasAdBlockEnabled = () => {
   const [hasEnabledAdBlock] = useState(typeof window === 'object' ? (() => {
     try {
       return !(typeof btoa === 'function');
-    } catch (e) {
+    } catch {
       return true;
     }
   })() : false);
 
   useLayoutEffect(() => {
     if (hasEnabledAdBlock) {
-      // eslint-disable-next-line no-alert
+      // eslint-disable-next-line no-alert -- warning
       alert(alertMsg);
     }
   }, [hasEnabledAdBlock]);

@@ -55,7 +55,7 @@ export default function MonsterPLHistogramChart() {
         },
         tooltip: {
           trigger: 'item',
-          formatter: ({ data }: { data: (number | string)[] }) => `<b>${data[4]}</b> ${data[1]}`
+          formatter: ({ data }: { data: Array<number | string> }) => `<b>${data[4]}</b> ${data[1]}`
         },
         series: [{
           name: 'monsterClass',
@@ -81,7 +81,7 @@ function buildDataSet(monsters?: MonsterInfo[]) {
 
   const plArr = monsters.filter(monster => monster.plvl > 0).map(monster => monster.plvl) ?? [];
 
-  const dataBin: [number, number, number, number, string][] = [];
+  const dataBin: Array<[number, number, number, number, string]> = [];
 
   for (let i = 0; i + 50 <= 2250; i = i + 50) {
     dataBin.push([i + 25, plArr.filter((plvl) => (plvl > i && i + 50 >= plvl)).length, i, i + 50, `${i} - ${i + 50}`]);

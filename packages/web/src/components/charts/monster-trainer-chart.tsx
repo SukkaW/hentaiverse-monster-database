@@ -27,7 +27,6 @@ export default function MonsterTrainerChart() {
   const dataSet = useMemo(() => buildDataSet(monsters), [monsters]);
 
   return useMemo(() => {
-
     if (isLoading) {
       return <div>Loading...</div>;
     }
@@ -93,14 +92,14 @@ export default function MonsterTrainerChart() {
   }, [dataSet, isLoading]);
 }
 
-function buildDataSet(monsters?: MonsterInfo[]): { name: string, value: number }[] {
+function buildDataSet(monsters?: MonsterInfo[]): Array<{ name: string, value: number }> {
   if (!monsters) {
     return [];
   }
 
   const unsortedDataSet: Record<string, number> = {};
 
-  monsters?.filter(monster => monster.trainer !== '').forEach(monster => {
+  monsters.filter(monster => monster.trainer !== '').forEach(monster => {
     unsortedDataSet[monster.trainer] = (unsortedDataSet[monster.trainer] || 0) + 1;
   });
 

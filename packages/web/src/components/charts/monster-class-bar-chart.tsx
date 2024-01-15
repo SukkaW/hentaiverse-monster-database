@@ -25,7 +25,6 @@ export default function MonsterClassBarChart() {
   const dataSet = useMemo(() => buildDataSet(monsters), [monsters]);
 
   return useMemo(() => {
-
     if (isLoading) {
       return <div>Loading...</div>;
     }
@@ -73,7 +72,7 @@ export default function MonsterClassBarChart() {
   }, [dataSet, isLoading]);
 }
 
-export function buildDataSet(monsters?: MonsterInfo[]): { name: string, value: number }[] {
+export function buildDataSet(monsters?: MonsterInfo[]): Array<{ name: string, value: number }> {
   if (!monsters) return [];
 
   const unsortedDataSet: Record<string, number> = {};

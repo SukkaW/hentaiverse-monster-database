@@ -53,7 +53,7 @@ export default function MonsterTrainerPLChart() {
         }],
         tooltip: {
           trigger: 'item',
-          formatter: ({ data }: { data: (number | string)[] }) => `<b>${data[0]}</b><br>Min ${data[1]}<br>Max ${data[5]}`,
+          formatter: ({ data }: { data: Array<number | string> }) => `<b>${data[0]}</b><br>Min ${data[1]}<br>Max ${data[5]}`,
           axisPointer: {
             type: 'shadow'
           }

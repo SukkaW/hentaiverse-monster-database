@@ -4,9 +4,9 @@ import type { GetMonsterUsingId, UpdateMonster } from './type';
 
 const project = Deta(process.env.DETA_PROJECT_KEY);
 
-export const getMonsterUsingId: GetMonsterUsingId = (monsterId: number, isIsekai: boolean) => {
+export const getMonsterUsingId: GetMonsterUsingId = (monsterId: number, isIsekai: boolean): Promise<MonsterInfo> => {
   const db = project.Base(isIsekai ? 'isekai' : 'persistent');
-  return db.get(String(monsterId)) as unknown as Promise<MonsterInfo>;
+  return db.get(String(monsterId)) as any;
 };
 
 export const updateMonster: UpdateMonster = (data: MonsterInfo, isIsekai: boolean) => {

@@ -35,7 +35,7 @@ const fastifyCorsOption: FastifyCorsOptions = {
   maxAge: 7200 // A 7200 seconds limit is defeined by WHATWG Fetch Standard.
 };
 
-export const app: FastifyPluginAsync = async (fastify) => {
+export const app: FastifyPluginAsync = (fastify) => {
   fastify.register(fastifyCors, fastifyCorsOption);
 
   fastify.all(
@@ -46,7 +46,7 @@ export const app: FastifyPluginAsync = async (fastify) => {
         response.status(405);
         return {
           code: 405,
-          msg: `${request.method ?? 'Non PUT'} method is not allowed`
+          msg: `${request.method || 'Non PUT'} method is not allowed`
         };
       }
 
@@ -68,4 +68,6 @@ export const app: FastifyPluginAsync = async (fastify) => {
       };
     }
   );
+
+  return Promise.resolve();
 };

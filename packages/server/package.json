@@ -1,8 +1,8 @@
 {
   "name": "@hvmonsterdb/server",
   "version": "1.0.0",
-  "description": "",
   "private": true,
+  "description": "",
   "scripts": {
     "build": "rollup --configPlugin swc3 -c rollup.config.ts --bundleConfigAsCjs"
   },
@@ -10,19 +10,19 @@
   "author": "Sukka <https://skk.moe>",
   "license": "GPL-3.0",
   "dependencies": {
-    "@fastify/cors": "^8.3.0",
-    "deta": "^1.1.0",
-    "dotenv": "^16.1.4",
-    "fastify": "^4.17.0",
+    "@fastify/cors": "^8.5.0",
+    "deta": "^1.2.0",
+    "dotenv": "^16.3.1",
+    "fastify": "^4.25.2",
     "find-up": "5.0.0",
-    "fluent-json-schema": "^4.1.0"
+    "fluent-json-schema": "^4.2.1"
   },
   "devDependencies": {
     "@hvmonsterdb/types": "workspace:*",
-    "@rollup/plugin-commonjs": "^25.0.0",
-    "@rollup/plugin-node-resolve": "^15.1.0",
-    "@types/node": "^20.2.5",
-    "rollup": "^3.24.0",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@types/node": "^20.11.1",
+    "rollup": "^3.29.4",
     "rollup-plugin-swc3": "^0.8.2"
   }
 }

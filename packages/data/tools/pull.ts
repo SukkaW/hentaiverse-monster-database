@@ -1,4 +1,4 @@
-/* eslint-disable no-await-in-loop */
+/* eslint-disable no-await-in-loop -- no concurrency */
 import { Deta } from 'deta';
 import path from 'path';
 import { promises as fsPromises } from 'fs';
@@ -6,6 +6,8 @@ import findUp from 'find-up';
 
 import * as dotenv from 'dotenv';
 
+// TODO
+// eslint-disable-next-line @typescript-eslint/no-restricted-imports -- migrate later
 import pRetry, { type Options as PRetryOptions } from 'p-retry';
 
 import type Base from 'deta/dist/types/base';
@@ -16,7 +18,7 @@ import type Base from 'deta/dist/types/base';
   }
 
   if (typeof process.env.DETA_PROJECT_KEY !== 'string') {
-    throw new Error('DETA_PROJECT_KEY is not defined!');
+    throw new TypeError('DETA_PROJECT_KEY is not defined!');
   }
 
   const project = Deta(process.env.DETA_PROJECT_KEY);
@@ -30,7 +32,7 @@ import type Base from 'deta/dist/types/base';
   let persistentMonsterData = res.items;
   let retryOpt: PRetryOptions = {
     retries: 114514,
-    onFailedAttempt: (e) => {
+    onFailedAttempt(e) {
       console.log('[Persistent]', `Attempt ${e.attemptNumber} failed. There are ${e.retriesLeft} retries left.`);
     }
   };
@@ -48,7 +50,7 @@ import type Base from 'deta/dist/types/base';
   let isekaiMonsterData = res.items;
   retryOpt = {
     retries: 114514,
-    onFailedAttempt: (e) => {
+    onFailedAttempt(e) {
       console.log('[Isekai]', `Attempt ${e.attemptNumber} failed. There are ${e.retriesLeft} retries left.`);
     }
   };

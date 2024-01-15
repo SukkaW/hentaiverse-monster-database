@@ -128,7 +128,7 @@ export default function MainEntry() {
                   </Col>
                 </Row>
                 {elementsGroup.map((elements) => (
-                  <Row key={elements.join()}>
+                  <Row key={elements.join(',')}>
                     {elements.map((element) => (
                       <Col className="h-[500px]" key={element}>
                         <Suspense fallback={<div>Loading...</div>}>

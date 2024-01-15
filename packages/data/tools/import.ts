@@ -13,7 +13,7 @@ import findUp from 'find-up';
   }
 
   if (typeof process.env.DETA_PROJECT_KEY !== 'string') {
-    throw new Error('DETA_PROJECT_KEY is not defined!');
+    throw new TypeError('DETA_PROJECT_KEY is not defined!');
   }
 
   const project = Deta(process.env.DETA_PROJECT_KEY);
@@ -60,7 +60,7 @@ import findUp from 'find-up';
       result[chunk].push(element);
       return result;
     }, [])) {
-      // eslint-disable-next-line no-await-in-loop
+      // eslint-disable-next-line no-await-in-loop -- no concurrency
       await isekaiWorldDB.putMany(chunk.map((data: any) => ({
         ...data,
         key: String(data.monsterId)

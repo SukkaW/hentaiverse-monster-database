@@ -8,19 +8,12 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "allowJs": true,
     "noEmit": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true
   },
   "include": [
-    "env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
+    "index.d.ts"
   ]
 }

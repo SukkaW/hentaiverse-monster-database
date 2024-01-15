@@ -28,7 +28,6 @@ export function IsekaiSwitch() {
       >
         <span className="flex items-center justify-center w-full h-full">
           {
-            // eslint-disable-next-line no-nested-ternary
             isPending
               ? (
                 <svg xmlns="http://www.w3.org/2000/svg" className={clsx(isIsekai ? 'stroke-yellow-900' : 'stroke-yellow-600', 'flex items-center justify-center w-4 h-4')} viewBox="0 0 38 38">

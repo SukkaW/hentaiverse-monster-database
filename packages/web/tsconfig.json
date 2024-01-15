@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "lib": ["es2022", "dom"],
     "target": "es2018",
+    "lib": ["es2022", "dom"],
     "jsx": "react-jsx",
     "module": "commonjs",
+    "moduleResolution": "node",
     "declaration": false,
     "outDir": "dist",
-    "strict": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "strict": true
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["dist", "*.d.ts", "node_modules"]

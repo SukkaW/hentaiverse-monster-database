@@ -1,11 +1,11 @@
 {
   "name": "@hvmonsterdb/types",
   "version": "1.0.0",
-  "description": "",
   "private": true,
+  "description": "",
+  "types": "index.d.ts",
   "scripts": {},
   "keywords": [],
   "author": "Sukka <https://skk.moe>",
-  "types": "index.d.ts",
   "license": "GPL-3.0"
 }
