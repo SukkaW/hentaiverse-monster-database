@@ -12,7 +12,7 @@
   "dependencies": {
     "@fastify/cors": "^8.5.0",
     "deta": "^1.2.0",
-    "dotenv": "^16.3.1",
+    "dotenv": "^16.3.2",
     "fastify": "^4.25.2",
     "find-up": "5.0.0",
     "fluent-json-schema": "^4.2.1"
@@ -21,8 +21,8 @@
     "@hvmonsterdb/types": "workspace:*",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
-    "@types/node": "^20.11.1",
-    "rollup": "^3.29.4",
-    "rollup-plugin-swc3": "^0.8.2"
+    "@types/node": "^20.11.5",
+    "rollup": "^4.9.5",
+    "rollup-plugin-swc3": "^0.11.0"
   }
 }

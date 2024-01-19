@@ -12,13 +12,13 @@
   "dependencies": {
     "cli-progress": "^3.12.0",
     "deta": "^1.2.0",
-    "dotenv": "^16.3.1",
+    "dotenv": "^16.3.2",
     "find-up": "5.0.0",
     "p-retry": "4.6.2"
   },
   "devDependencies": {
     "@types/cli-progress": "^3.11.5",
-    "@types/node": "^18.19.7",
+    "@types/node": "^20.11.5",
     "ts-node": "^10.9.2"
   },
   "engines": {

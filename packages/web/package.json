@@ -17,15 +17,15 @@
     "clsx": "^2.1.0",
     "echarts": "^5.4.3",
     "foxact": "^0.2.30",
-    "gridjs": "^6.1.0",
+    "gridjs": "^6.1.1",
     "react": "18.3.0-next-353c30252-20221202",
     "react-dom": "18.3.0-next-353c30252-20221202",
-    "swr": "2.2.2"
+    "swr": "2.2.4"
   },
   "devDependencies": {
     "@hvmonsterdb/types": "workspace:*",
     "@parcel/reporter-bundle-analyzer": "^2.11.0",
-    "@types/react": "^18.2.47",
+    "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "parcel": "^2.11.0",
     "postcss": "^8.4.33",
