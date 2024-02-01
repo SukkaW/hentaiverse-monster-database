@@ -4,6 +4,8 @@ const VALID_MONSTER_CLASS = new Set(['Arthropod', 'Avion', 'Beast', 'Celestial',
 
 const VALID_MONSTER_ATTACK = new Set(['Piercing', 'Crushing', 'Slashing', 'Fire', 'Cold', 'Wind', 'Elec', 'Holy', 'Dark', 'Void']);
 
+const MONSTER_STATUS = ['piercing', 'crushing', 'slashing', 'cold', 'wind', 'elec', 'fire', 'dark', 'holy'] as const;
+
 export function validateMonsterDataInterface(data?: MonsterInfo): data is MonsterInfo {
   if (
     data
@@ -34,7 +36,7 @@ const validMonsterStatus = (prevMonsterData: MonsterInfo, newMonsterData: Monste
     && prevMonsterData.monsterClass === newMonsterData.monsterClass
     && prevMonsterData.plvl <= newMonsterData.plvl
     && prevMonsterData.attack === newMonsterData.attack
-    && (['piercing', 'crushing', 'slashing', 'cold', 'wind', 'elec', 'fire', 'dark', 'holy'] as const).every(
+    && MONSTER_STATUS.every(
       key => prevMonsterData[key] <= newMonsterData[key]
     )
   ) {

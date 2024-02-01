@@ -9,7 +9,6 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@hvmonsterdb/server": "workspace:*",
-    "dotenv": "^16.4.1",
     "fastify": "^4.26.0"
   },
   "devDependencies": {
