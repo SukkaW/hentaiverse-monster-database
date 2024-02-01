@@ -9,10 +9,10 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@hvmonsterdb/server": "workspace:*",
-    "dotenv": "^16.3.2",
-    "fastify": "^4.25.2"
+    "dotenv": "^16.4.1",
+    "fastify": "^4.26.0"
   },
   "devDependencies": {
-    "@vercel/node": "^3.0.16"
+    "@vercel/node": "^3.0.17"
   }
 }
