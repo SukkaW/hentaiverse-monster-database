@@ -15,22 +15,22 @@
   "dependencies": {
     "@headlessui/react": "^1.7.18",
     "clsx": "^2.1.0",
-    "echarts": "^5.4.3",
-    "foxact": "^0.2.31",
-    "gridjs": "^6.1.1",
+    "echarts": "^5.5.0",
+    "foxact": "^0.2.33",
+    "gridjs": "^6.2.0",
     "react": "18.3.0-next-353c30252-20221202",
     "react-dom": "18.3.0-next-353c30252-20221202",
-    "swr": "2.2.4"
+    "swr": "2.2.5"
   },
   "devDependencies": {
     "@hvmonsterdb/types": "workspace:*",
-    "@parcel/reporter-bundle-analyzer": "^2.11.0",
-    "@types/react": "^18.2.48",
-    "@types/react-dom": "^18.2.18",
-    "parcel": "^2.11.0",
-    "postcss": "^8.4.33",
+    "@parcel/reporter-bundle-analyzer": "^2.12.0",
+    "@types/react": "^18.2.75",
+    "@types/react-dom": "^18.2.24",
+    "parcel": "^2.12.0",
+    "postcss": "^8.4.38",
     "process": "^0.11.10",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.3"
   },
   "alias": {
     "buffer": false
