@@ -1,4 +1,5 @@
 import type { MonsterInfo } from '@hvmonsterdb/types';
+import process from 'node:process';
 
 const VALID_MONSTER_CLASS = new Set(['Arthropod', 'Avion', 'Beast', 'Celestial', 'Daimon', 'Dragonkin', 'Elemental', 'Giant', 'Humanoid', 'Mechanoid', 'Reptilian', 'Sprite', 'Undead', 'Common', 'Rare', 'Legendary', 'Ultimate']);
 
@@ -53,10 +54,8 @@ import { getMonsterUsingId, updateMonster } from './adapter/deta';
 export async function putMonsterDataToDatabase(data: MonsterInfo) {
   if (typeof process.env.DETA_PROJECT_KEY === 'string') {
     const existedMonster = await getMonsterUsingId(data.monsterId, data.trainer === 'Isekai');
-    if (existedMonster) {
-      if (!validMonsterStatus(existedMonster, data)) {
-        return;
-      }
+    if (existedMonster && !validMonsterStatus(existedMonster, data)) {
+      return;
     }
     return updateMonster(data, data.trainer === 'Isekai');
   }

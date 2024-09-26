@@ -1,14 +1,17 @@
 /* eslint-disable no-await-in-loop -- no concurrency */
 import { Deta } from 'deta';
-import path from 'path';
-import { promises as fsPromises } from 'fs';
+import path from 'node:path';
+import { promises as fsPromises } from 'node:fs';
+import process from 'node:process';
 import findUp from 'find-up';
 
 import * as dotenv from 'dotenv';
 
 // TODO
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports -- migrate later
-import pRetry, { type Options as PRetryOptions } from 'p-retry';
+import pRetry from 'p-retry';
+// eslint-disable-next-line @typescript-eslint/no-restricted-imports -- migrate later
+import type { Options as PRetryOptions } from 'p-retry';
 
 import type Base from 'deta/dist/types/base';
 

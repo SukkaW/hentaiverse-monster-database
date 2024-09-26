@@ -1,6 +1,7 @@
 import { Deta } from 'deta';
 import type { MonsterInfo } from '@hvmonsterdb/types';
 import type { GetMonsterUsingId, UpdateMonster } from './type';
+import process from 'node:process';
 
 const project = Deta(process.env.DETA_PROJECT_KEY);
 

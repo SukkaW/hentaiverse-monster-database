@@ -21,12 +21,12 @@ const MonsterTrainerPLChart = lazy(() => import('./components/charts/monster-tra
 const MonsterScanChart = lazy(() => import('./components/charts/monster-scan-chart'));
 const MonsterMitigationChart = lazy(() => import('./components/charts/monster-mitigation-chart'));
 
-const elementsGroup = (['fire', 'cold', 'wind', 'elec', 'dark', 'holy'] as const).reduce((result, element, index) => {
+const elementsGroup = (['fire', 'cold', 'wind', 'elec', 'dark', 'holy'] as const).reduce<MonsterDatabase.Element[][]>((result, element, index) => {
   const chunk = Math.floor(index / 2);
   result[chunk] = result[chunk] ?? [];
   result[chunk].push(element);
   return result;
-}, [] as MonsterDatabase.Element[][]);
+}, []);
 
 export default function MainEntry() {
   const isIsekai = useIsIsekai();

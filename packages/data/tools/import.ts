@@ -1,7 +1,8 @@
 // Migrate the old data to the new server
 import { Deta } from 'deta';
-import path from 'path';
-import { promises as fsPromises } from 'fs';
+import path from 'node:path';
+import { promises as fsPromises } from 'node:fs';
+import process from 'node:process';
 import progress from 'cli-progress';
 
 import dotenv from 'dotenv';

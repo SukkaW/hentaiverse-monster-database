@@ -8,7 +8,7 @@ import { SearchByTrainerProvider } from './components/search-by-trainer-state';
 export function App() {
   useEffect(() => {
     if (window.location.hostname === 'hv-monster-dataview.pages.dev') {
-      window.location.hostname = 'hv-monster.skk.moe';
+      window.location.assign('https://hv-monster.skk.moe');
     }
   }, []);
 
