@@ -13,16 +13,16 @@
   "author": "Sukka <https://skk.moe>",
   "license": "GPL-3.0",
   "devDependencies": {
-    "@eslint-sukka/node": "^5.1.2",
-    "@eslint-sukka/react": "^5.1.2",
+    "@eslint-sukka/node": "^6.5.0",
+    "@eslint-sukka/react": "^6.5.0",
     "@eslint-sukka/ts": "^5.1.2",
-    "@swc/core": "^1.4.12",
-    "eslint": "^9.0.0",
-    "eslint-config-sukka": "^5.1.2",
-    "eslint-formatter-sukka": "^5.1.2",
-    "rimraf": "^5.0.5",
+    "@swc/core": "^1.7.28",
+    "eslint": "^9.11.1",
+    "eslint-config-sukka": "^6.5.0",
+    "eslint-formatter-sukka": "^6.5.0",
+    "rimraf": "^6.0.1",
     "turbo": "^1.13.2",
-    "typescript": "^5.4.4"
+    "typescript": "^5.6.2"
   },
   "workspaces": [
     "packages/*"
@@ -55,5 +55,6 @@
       "which-typed-array": "npm:@nolyfill/which-typed-array@latest",
       "es-iterator-helpers": "npm:@nolyfill/es-iterator-helpers@latest"
     }
-  }
+  },
+  "packageManager": "pnpm@9.11.0+sha512.0a203ffaed5a3f63242cd064c8fb5892366c103e328079318f78062f24ea8c9d50bc6a47aa3567cabefd824d170e78fa2745ed1f16b132e16436146b7688f19b"
 }
