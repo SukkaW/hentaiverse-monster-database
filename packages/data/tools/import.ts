@@ -26,6 +26,10 @@ if (typeof process.env.SUPABASE_PROJECT_URL !== 'string') {
 
   console.log(persistentData, isekaiData);
 
-  await supabase.from('Persistent').insert(persistentData);
-  await supabase.from('Isekai').insert(isekaiData);
+  await supabase.from('Persistent').upsert(persistentData, {
+    onConflict: ['monsterId'].join(',')
+  });
+  await supabase.from('Isekai').upsert(isekaiData, {
+    onConflict: ['monsterId'].join(',')
+  });
 })();
