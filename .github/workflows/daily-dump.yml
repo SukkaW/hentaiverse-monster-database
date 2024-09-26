@@ -24,7 +24,8 @@ jobs:
       - name: Dump Database
         run: pnpm --filter=data run pull
         env:
-          DETA_PROJECT_KEY: ${{ secrets.DETA_PROJECT_KEY }}
+          SUPABASE_PROJECT_URL: ${{ secrets.SUPABASE_PROJECT_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
