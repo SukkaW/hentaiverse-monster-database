@@ -11,7 +11,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@fastify/cors": "^10.0.1",
-    "deta": "^1.2.0",
+    "@supabase/supabase-js": "^2.45.4",
     "dotenv": "^16.4.5",
     "fastify": "^4.26.2",
     "find-up": "5.0.0",

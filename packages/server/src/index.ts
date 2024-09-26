@@ -10,11 +10,18 @@ import { app } from './app';
  * This is an example of how you would normally start your own server.
  */
 
-if (typeof process.env.DETA_PROJECT_KEY !== 'string') {
+if (typeof process.env.SUPABASE_PROJECT_URL !== 'string') {
   dotenv.config({ path: findUp.sync('.env') });
 }
 
-let port = 3000;
+if (
+  typeof process.env.SUPABASE_PROJECT_URL !== 'string'
+  || typeof process.env.SUPABASE_SERVICE_KEY !== 'string'
+) {
+  throw new TypeError('SUPABASE_PROJECT_URL or SUPABASE_SERVICE_KEY is not defined!');
+}
+
+let port = 3010;
 if (process.env.POST != null) {
   const envPort = Number.parseInt(process.env.POST, 10);
   if (!Number.isNaN(envPort)) {
