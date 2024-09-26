@@ -1,76 +1,31 @@
-// Migrate the old data to the new server
-import { Deta } from 'deta';
-import path from 'node:path';
-import { promises as fsPromises } from 'node:fs';
+import { createClient } from '@supabase/supabase-js';
 import process from 'node:process';
-import progress from 'cli-progress';
-
+import fsp from 'node:fs/promises';
+import path from 'node:path';
 import dotenv from 'dotenv';
 import findUp from 'find-up';
 
+if (typeof process.env.SUPABASE_PROJECT_URL !== 'string') {
+  dotenv.config({ path: findUp.sync('.env') });
+}
+
+if (
+  typeof process.env.SUPABASE_PROJECT_URL !== 'string'
+  || typeof process.env.SUPABASE_SERVICE_KEY !== 'string'
+) {
+  throw new TypeError('DETA_PROJECT_KEY is not defined!');
+}
+
 (async () => {
-  if (typeof process.env.DETA_PROJECT_KEY !== 'string') {
-    dotenv.config({ path: findUp.sync('.env') });
-  }
-
-  if (typeof process.env.DETA_PROJECT_KEY !== 'string') {
-    throw new TypeError('DETA_PROJECT_KEY is not defined!');
-  }
-
-  const project = Deta(process.env.DETA_PROJECT_KEY);
-
-  const persistentWorldDB = project.Base('persistent');
-  const isekaiWorldDB = project.Base('isekai');
-
+  // Create a single supabase client for interacting with your database
+  const supabase = createClient(process.env.SUPABASE_PROJECT_URL!, process.env.SUPABASE_SERVICE_KEY!);
   const [persistentData, isekaiData] = await Promise.all([
-    fsPromises.readFile(path.resolve(__dirname, 'persistent.json'), 'utf8').then(JSON.parse),
-    fsPromises.readFile(path.resolve(__dirname, 'isekai.json'), 'utf8').then(JSON.parse)
+    fsp.readFile(path.join(__dirname, 'persistent.json'), 'utf8').then(JSON.parse),
+    fsp.readFile(path.join(__dirname, 'isekai.json'), 'utf8').then(JSON.parse)
   ]);
 
-  if (Array.isArray(persistentData)) {
-    const bar = new progress.SingleBar({}, progress.Presets.legacy);
-    bar.start(100, 0, {
-      speed: 'N/A'
-    });
+  console.log(persistentData, isekaiData);
 
-    await Promise.all(persistentData.reduce((result, element, index) => {
-      const chunk = index % 500;
-      result[chunk] ??= [];
-      result[chunk].push(element);
-      return result;
-    }, []).map(async (chunk: any[]) => {
-      await persistentWorldDB.putMany(chunk.map(data => ({
-        ...data,
-        key: String(data.monsterId)
-      })));
-      bar.increment(0.2);
-    }));
-    bar.stop();
-  }
-  console.log('Persistent Monster Data Imorted!');
-
-  if (Array.isArray(isekaiData)) {
-    const bar = new progress.SingleBar({}, progress.Presets.legacy);
-    bar.start(100, 0, {
-      speed: 'N/A'
-    });
-
-    for (const chunk of isekaiData.reduce((result, element, index) => {
-      const chunk = index % 1000;
-      result[chunk] ??= [];
-      result[chunk].push(element);
-      return result;
-    }, [])) {
-      // eslint-disable-next-line no-await-in-loop -- no concurrency
-      await isekaiWorldDB.putMany(chunk.map((data: any) => ({
-        ...data,
-        key: String(data.monsterId)
-      })));
-      bar.increment(0.1);
-    }
-
-    bar.stop();
-  }
-
-  console.log('Isekai Monster Data Imorted!');
+  await supabase.from('Persistent').insert(persistentData);
+  await supabase.from('Isekai').insert(isekaiData);
 })();

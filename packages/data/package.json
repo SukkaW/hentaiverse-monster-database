@@ -4,12 +4,14 @@
   "private": true,
   "description": "",
   "scripts": {
-    "pull": "ts-node tools/pull.ts"
+    "pull": "ts-node tools/pull.ts",
+    "import": "ts-node tools/import.ts"
   },
   "keywords": [],
   "author": "Sukka <https://skk.moe>",
   "license": "GPL-3.0",
   "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
     "cli-progress": "^3.12.0",
     "deta": "^1.2.0",
     "dotenv": "^16.4.5",
