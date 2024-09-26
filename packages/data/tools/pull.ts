@@ -1,87 +1,103 @@
-/* eslint-disable no-await-in-loop -- no concurrency */
-import { Deta } from 'deta';
-import path from 'path';
-import { promises as fsPromises } from 'fs';
+import process from 'node:process';
+import fsp from 'node:fs/promises';
+import path from 'node:path';
 import findUp from 'find-up';
 
 import * as dotenv from 'dotenv';
-
+import { createClient } from '@supabase/supabase-js';
 // TODO
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports -- migrate later
-import pRetry, { type Options as PRetryOptions } from 'p-retry';
+import pRetry from 'p-retry';
+// eslint-disable-next-line @typescript-eslint/no-restricted-imports -- migrate later
+import type { Options as PRetryOptions } from 'p-retry';
 
-import type Base from 'deta/dist/types/base';
+if (typeof process.env.SUPABASE_PROJECT_URL !== 'string') {
+  dotenv.config({ path: findUp.sync('.env') });
+}
+
+if (
+  typeof process.env.SUPABASE_PROJECT_URL !== 'string'
+  || typeof process.env.SUPABASE_SERVICE_KEY !== 'string'
+) {
+  throw new TypeError('SUPABASE_PROJECT_URL or SUPABASE_SERVICE_KEY is not defined!');
+}
+
+const supabase = createClient(process.env.SUPABASE_PROJECT_URL, process.env.SUPABASE_SERVICE_KEY);
+const persistentWorldDB = supabase.from('Persistent');
+const isekaiWorldDB = supabase.from('Isekai');
 
 (async () => {
-  if (typeof process.env.DETA_PROJECT_KEY !== 'string') {
-    dotenv.config({ path: findUp.sync('.env') });
-  }
+  // Create a single supabase client for interacting with your database
 
-  if (typeof process.env.DETA_PROJECT_KEY !== 'string') {
-    throw new TypeError('DETA_PROJECT_KEY is not defined!');
-  }
-
-  const project = Deta(process.env.DETA_PROJECT_KEY);
-
-  const persistentWorldDB = project.Base('persistent');
-  const isekaiWorldDB = project.Base('isekai');
-
-  const fetchSinceLast = (db: Base, last: string) => async () => db.fetch({}, { last });
-
-  let res = await persistentWorldDB.fetch();
-  let persistentMonsterData = res.items;
-  let retryOpt: PRetryOptions = {
-    retries: 114514,
-    onFailedAttempt(e) {
-      console.log('[Persistent]', `Attempt ${e.attemptNumber} failed. There are ${e.retriesLeft} retries left.`);
-    }
-  };
-  while (res.last) {
-    res = await pRetry(
-      fetchSinceLast(persistentWorldDB, res.last),
-      retryOpt
-    );
-    persistentMonsterData = persistentMonsterData.concat(res.items);
-
-    console.log('[Persistent]', persistentMonsterData.length, 'fetched!');
-  }
-
-  res = await isekaiWorldDB.fetch();
-  let isekaiMonsterData = res.items;
-  retryOpt = {
-    retries: 114514,
-    onFailedAttempt(e) {
-      console.log('[Isekai]', `Attempt ${e.attemptNumber} failed. There are ${e.retriesLeft} retries left.`);
-    }
-  };
-
-  while (res.last) {
-    res = await pRetry(fetchSinceLast(isekaiWorldDB, res.last), retryOpt);
-    isekaiMonsterData = isekaiMonsterData.concat(res.items);
-    console.log('[Isekai]', isekaiMonsterData.length, 'fetched!');
-  }
-
-  persistentMonsterData.forEach(i => {
-    delete i.key;
-  });
-  isekaiMonsterData.forEach(i => {
-    delete i.key;
-  });
+  const persistentMonsterData = await fetchAllRowsFrom(persistentWorldDB, 'Persistent');
+  const isekaiMonsterData = await fetchAllRowsFrom(isekaiWorldDB, 'Isekai');
 
   const distDir = path.resolve(__dirname, '../public');
 
-  try {
-    await fsPromises.mkdir(distDir);
-  } catch (e) {
-    if ((e as any).code === 'EEXIST') {
-      // do nothing
+  await fsp.mkdir(distDir, { recursive: true });
+
+  await Promise.all([
+    fsp.writeFile(path.resolve(distDir, 'persistent.json'), arrayStringify(persistentMonsterData)),
+    fsp.writeFile(path.resolve(distDir, 'isekai.json'), arrayStringify(isekaiMonsterData))
+  ]);
+})();
+
+async function fetchAllRowsFrom<T = any>(table: typeof persistentWorldDB | typeof isekaiWorldDB, logTitle: string): Promise<T[]> {
+  const retryOpt: PRetryOptions = {
+    retries: 10,
+    onFailedAttempt(e) {
+      console.log(`[${logTitle}]`, `Attempt ${e.attemptNumber} failed. There are ${e.retriesLeft} retries left.`);
+    }
+  };
+
+  let allData: T[] = [];
+  let from = 0;
+  const pageSize = 800; // Adjust the page size if necessary
+  let data: T[];
+
+  const fetchFrom = (from: number) => async () => {
+    // Fetch a chunk of data
+    const { data, error } = await table
+      .select('*')
+      .range(from, from + pageSize - 1);
+
+    if (error) {
+      throw error as any;
+    }
+    return data;
+  };
+
+  do {
+    // eslint-disable-next-line no-await-in-loop -- one by one
+    data = await pRetry(
+      fetchFrom(from),
+      retryOpt
+    );
+
+    // Add the fetched data to the result set
+    allData = allData.concat(data);
+    console.log(`[${logTitle}]`, allData.length, 'fetched!');
+
+    from += pageSize;
+  } while (data.length === pageSize); // Continue fetching if the last chunk was full
+
+  return allData;
+}
+
+function arrayStringify(object: any[]) {
+  let result = '[\n';
+
+  for (let i = 0, len = object.length - 1; i < len; i++) {
+    result += JSON.stringify(object[i]);
+
+    if (i < len - 1) {
+      result += ',\n';
     } else {
-      throw e;
+      result += '\n';
     }
   }
 
-  await Promise.all([
-    fsPromises.writeFile(path.resolve(distDir, 'persistent.json'), JSON.stringify(persistentMonsterData)),
-    fsPromises.writeFile(path.resolve(distDir, 'isekai.json'), JSON.stringify(isekaiMonsterData))
-  ]);
-})();
+  result += ']\n';
+
+  return result;
+}

@@ -18,13 +18,14 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+          node-version-file: .nvmrc
           cache: "pnpm"
       - run: pnpm install
       - name: Dump Database
         run: pnpm --filter=data run pull
         env:
-          DETA_PROJECT_KEY: ${{ secrets.DETA_PROJECT_KEY }}
+          SUPABASE_PROJECT_URL: ${{ secrets.SUPABASE_PROJECT_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
@@ -40,7 +41,7 @@ jobs:
           echo "Last updated at $(date -u)" > /tmp/public/last-run.txt
           cp ./packages/api-server-on-vercel/should-vercel-build.sh /tmp/public/packages/api-server-on-vercel/should-vercel-build.sh
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: /tmp/public

@@ -1,4 +1,5 @@
-import { useLayoutEffect, useState } from 'react';
+import { useState } from 'react';
+import { useLayoutEffect } from 'foxact/use-isomorphic-layout-effect';
 
 const alertMsg = `You appear to have ADBlock enabled!
 I understand why you have ADBlock enabled (I really do!).

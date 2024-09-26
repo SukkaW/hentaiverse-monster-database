@@ -48,16 +48,12 @@ const validMonsterStatus = (prevMonsterData: MonsterInfo, newMonsterData: Monste
 
 // You can replace "./adapter/deta" with your own adapter, as long
 // as it exports two methods: getMonsterUsingId and updateMonster.
-import { getMonsterUsingId, updateMonster } from './adapter/deta';
+import { getMonsterUsingId, updateMonster } from './adapter/supbase';
 
 export async function putMonsterDataToDatabase(data: MonsterInfo) {
-  if (typeof process.env.DETA_PROJECT_KEY === 'string') {
-    const existedMonster = await getMonsterUsingId(data.monsterId, data.trainer === 'Isekai');
-    if (existedMonster) {
-      if (!validMonsterStatus(existedMonster, data)) {
-        return;
-      }
-    }
-    return updateMonster(data, data.trainer === 'Isekai');
+  const existedMonster = await getMonsterUsingId(data.monsterId, data.trainer === 'Isekai');
+  if (existedMonster && !validMonsterStatus(existedMonster, data)) {
+    return;
   }
+  return updateMonster(data, data.trainer === 'Isekai');
 }

@@ -79,7 +79,7 @@ export default function MonsterPLHistogramChart() {
 function buildDataSet(monsters?: MonsterInfo[]) {
   if (!monsters) return [];
 
-  const plArr = monsters.filter(monster => monster.plvl > 0).map(monster => monster.plvl) ?? [];
+  const plArr = monsters.filter(monster => monster.plvl > 0).map(monster => monster.plvl);
 
   const dataBin: Array<[number, number, number, number, string]> = [];
 

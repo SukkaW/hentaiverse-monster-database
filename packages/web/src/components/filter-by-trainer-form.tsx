@@ -12,10 +12,10 @@ export function FilterByTrainerForm() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setTrainerName(trainerInputValue);
-    if (trainerInputValue !== '') {
-      window.history.pushState(null, '', `?trainer=${trainerInputValue}`);
-    } else {
+    if (trainerInputValue === '') {
       window.history.pushState(null, '', '/');
+    } else {
+      window.history.pushState(null, '', `?trainer=${trainerInputValue}`);
     }
   };
 
