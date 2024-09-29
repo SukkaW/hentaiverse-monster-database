@@ -28,8 +28,8 @@ export const AntiAdBlock = ({ children }: React.PropsWithChildren) => {
 
       <p>If you don&apos;t disable your ADBlock or remove the broken filter rule, you <span className="font-bold">might and will</span> encounter issues.</p>
 
-      <button className="border-2 p-2 m-2 shadow-md" onClick={() => { window.location.reload(); }}>I have disabled my AdBlock or removed the broken rule</button>
-      <button className="border-2 p-2 m-2 shadow-md" onClick={() => { setInsist(true); }}>I am aware the risk that site will break with my current AdBlock setup, and I insist continuing with AdBlock Enabled.</button>
+      <button type="button" className="border-2 p-2 m-2 shadow-md" onClick={() => { window.location.reload(); }}>I have disabled my AdBlock or removed the broken rule</button>
+      <button type="button" className="border-2 p-2 m-2 shadow-md" onClick={() => { setInsist(true); }}>I am aware the risk that site will break with my current AdBlock setup, and I insist continuing with AdBlock Enabled.</button>
     </div>
   );
 };

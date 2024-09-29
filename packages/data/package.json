@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@types/cli-progress": "^3.11.6",
-    "@types/node": "^22.7.2",
+    "@types/node": "^22.7.4",
     "ts-node": "^10.9.2"
   },
   "engines": {

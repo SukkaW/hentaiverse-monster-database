@@ -46,14 +46,20 @@ export default function MainEntry() {
         <Tab.List className="flex p-1 space-x-1 bg-yellow-800/5 rounded-xl">
           <Tab as={Fragment}>{
             ({ selected }) => (
-              <button className={clsx('w-full py-2.5 text-sm leading-5 font-medium rounded-lg focus:outline-none focus:ring-2 ring-offset-2 ring-offset-yellow-800 ring-white ring-opacity-60', selected ? 'text-[#5C0D12] bg-white shadow' : 'text-yellow-800 hover:opacity-75')}>
+              <button
+                type="button"
+                className={clsx('w-full py-2.5 text-sm leading-5 font-medium rounded-lg focus:outline-none focus:ring-2 ring-offset-2 ring-offset-yellow-800 ring-white ring-opacity-60', selected ? 'text-[#5C0D12] bg-white shadow' : 'text-yellow-800 hover:opacity-75')}
+              >
                 Data Tables
               </button>
             )
           }</Tab>
           <Tab as={Fragment}>{
             ({ selected }) => (
-              <button className={clsx('w-full py-2.5 text-sm leading-5 font-medium  rounded-lg focus:outline-none focus:ring-2 ring-offset-2 ring-offset-yellow-800 ring-white ring-opacity-60', selected ? 'text-[#5C0D12] bg-white shadow' : 'text-yellow-800 hover:opacity-75')}>
+              <button
+                type="button"
+                className={clsx('w-full py-2.5 text-sm leading-5 font-medium  rounded-lg focus:outline-none focus:ring-2 ring-offset-2 ring-offset-yellow-800 ring-white ring-opacity-60', selected ? 'text-[#5C0D12] bg-white shadow' : 'text-yellow-800 hover:opacity-75')}
+              >
                 Charts
               </button>
             )

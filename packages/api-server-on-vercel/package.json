@@ -12,6 +12,6 @@
     "fastify": "^4.26.2"
   },
   "devDependencies": {
-    "@vercel/node": "^3.2.16"
+    "@vercel/node": "^3.2.17"
   }
 }

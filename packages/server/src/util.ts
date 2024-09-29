@@ -7,8 +7,8 @@ const VALID_MONSTER_ATTACK = new Set(['Piercing', 'Crushing', 'Slashing', 'Fire'
 const MONSTER_STATUS = ['piercing', 'crushing', 'slashing', 'cold', 'wind', 'elec', 'fire', 'dark', 'holy'] as const;
 
 export function validateMonsterDataInterface(data?: MonsterInfo): data is MonsterInfo {
-  if (
-    data
+  return (
+    data != null
     && typeof data === 'object'
     && ([data.monsterId, data.plvl, data.piercing, data.crushing, data.slashing, data.cold, data.wind, data.elec, data.fire, data.dark, data.holy].every(Number.isInteger))
     && typeof data.monsterClass === 'string'
@@ -17,11 +17,7 @@ export function validateMonsterDataInterface(data?: MonsterInfo): data is Monste
     && typeof data.attack === 'string'
     && VALID_MONSTER_ATTACK.has(data.attack)
     && typeof data.trainer === 'string'
-  ) {
-    return true;
-  }
-
-  return false;
+  );
 }
 
 const padNumber = (num: number) => num.toString().padStart(2, '0');
@@ -30,21 +26,13 @@ export function getMonsterDatabaseCompatibleDate() {
   return `${date.getUTCFullYear()}-${padNumber(date.getUTCMonth() + 1)}-${padNumber(date.getUTCDate())}`;
 }
 
-const validMonsterStatus = (prevMonsterData: MonsterInfo, newMonsterData: MonsterInfo) => {
-  if (
-    prevMonsterData.monsterId === newMonsterData.monsterId
-    && prevMonsterData.monsterClass === newMonsterData.monsterClass
-    && prevMonsterData.plvl <= newMonsterData.plvl
-    && prevMonsterData.attack === newMonsterData.attack
-    && MONSTER_STATUS.every(
-      key => prevMonsterData[key] <= newMonsterData[key]
-    )
-  ) {
-    return true;
-  }
-
-  return false;
-};
+const validMonsterStatus = (prevMonsterData: MonsterInfo, newMonsterData: MonsterInfo) => (
+  prevMonsterData.monsterId === newMonsterData.monsterId
+  && prevMonsterData.monsterClass === newMonsterData.monsterClass
+  && prevMonsterData.plvl <= newMonsterData.plvl
+  && prevMonsterData.attack === newMonsterData.attack
+  && MONSTER_STATUS.every(key => prevMonsterData[key] <= newMonsterData[key])
+);
 
 // You can replace "./adapter/deta" with your own adapter, as long
 // as it exports two methods: getMonsterUsingId and updateMonster.
