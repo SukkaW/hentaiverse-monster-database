@@ -38,7 +38,7 @@ Also known as the https://hv-monster.skk.moe. The website downloads the data fro
 
 [`/packages/web`](./packages/web/) holds the source code of the website. It is a static website built with [React](https://reactjs.org), [TailwindCSS](https://tailwindcss.com), [SWR](https://swr.vercel.app), [Grid.js](https://gridjs.io/) and [ECharts](https://echarts.apache.org/en/index.html).
 
-The project uses [Parcel](https://parceljs.org) to build and bundle the dist.
+The project uses [webpack](https://webpack.js.org) to build and bundle the dist.
 
 ### Backend (server)
 
