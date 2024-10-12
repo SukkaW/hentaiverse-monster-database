@@ -84,7 +84,24 @@ async function fetchAllRowsFrom<T = any>(table: typeof persistentWorldDB | typeo
   return allData;
 }
 
-function arrayStringify(object: any[]) {
+function arrayStringify<T extends object>(object: T[]) {
+  object.sort((a, b) => {
+    if (!(
+      'lastUpdate' in a
+      && typeof a.lastUpdate === 'string'
+      && 'lastUpdate' in b
+      && typeof b.lastUpdate === 'string'
+    )) {
+      return 0;
+    }
+
+    const dateA = new Date(a.lastUpdate).getTime();
+    const dateB = new Date(b.lastUpdate).getTime();
+
+    // sort from newest to oldest
+    return dateA - dateB;
+  });
+
   let result = '[\n';
 
   for (let i = 0, len = object.length - 1; i < len; i++) {
