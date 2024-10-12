@@ -4,11 +4,10 @@
   "private": true,
   "description": "",
   "scripts": {
-    "clean": "pnpx rimraf dist && pnpx rimraf .parcel-cache",
-    "prebuild": "pnpx rimraf dist",
-    "build": "parcel build src/index.html --no-source-maps",
-    "build:report": "parcel build ./src/index.html --no-source-maps --reporter @parcel/reporter-bundle-analyzer",
-    "dev": "parcel serve src/index.html"
+    "clean": "echo 'clean command is gone'",
+    "dev": "NODE_ENV=development webpack serve",
+    "build": "NODE_ENV=production webpack",
+    "build:analyze": "ANALYZE=true NODE_ENV=production webpack"
   },
   "author": "Sukka <https://skk.moe>",
   "license": "GPL-3.0",
@@ -19,20 +18,35 @@
     "foxact": "^0.2.38",
     "gridjs": "^6.2.0",
     "react": "18.3.0-next-353c30252-20221202",
+    "react-compiler-runtime": "0.0.0-experimental-8d8e73f-20241011",
     "react-dom": "18.3.0-next-353c30252-20221202",
     "swr": "2.2.5"
   },
   "devDependencies": {
     "@hvmonsterdb/types": "workspace:*",
-    "@parcel/reporter-bundle-analyzer": "^2.12.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
+    "@swc/core": "^1.7.28",
+    "@swc/helpers": "^0.5.13",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
-    "parcel": "^2.12.0",
+    "@types/webpack": "^5.28.5",
+    "browserslist": "^4.24.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "core-js": "^3.38.1",
+    "html-webpack-plugin": "^5.6.0",
+    "lightningcss": "^1.27.0",
+    "lightningcss-loader": "^2.1.0",
     "postcss": "^8.4.47",
-    "process": "^0.11.10",
-    "tailwindcss": "^3.4.13"
-  },
-  "alias": {
-    "buffer": false
+    "postcss-loader": "^8.1.1",
+    "react-compiler-webpack": "^0.1.2",
+    "react-refresh": "^0.14.2",
+    "swc-loader": "^0.2.6",
+    "tailwindcss": "^3.4.13",
+    "tsconfig-paths-webpack-plugin": "^4.1.0",
+    "webpack": "^5.95.0",
+    "webpack-bundle-analyzer": "^4.10.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0",
+    "webpackbar": "^6.0.1"
   }
 }
