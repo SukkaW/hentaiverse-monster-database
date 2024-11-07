@@ -59,7 +59,9 @@ export const app: FastifyPluginAsync = (fastify) => {
             await putMonsterDataToDatabase(data);
           }
         }
-      } catch { /* */ }
+      } catch (e) {
+        console.error(e);
+      }
 
       // we simply swallow error (if any) and always return 200
       return {
