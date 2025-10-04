@@ -11,8 +11,8 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@fastify/cors": "^9.0.1",
-    "@supabase/supabase-js": "^2.50.0",
-    "dotenv": "^16.5.0",
+    "@supabase/supabase-js": "^2.58.0",
+    "dotenv": "^16.6.1",
     "fastify": "^4.29.1",
     "find-up": "5.0.0",
     "fluent-json-schema": "^4.2.1"
@@ -21,8 +21,8 @@
     "@hvmonsterdb/types": "workspace:*",
     "@rollup/plugin-commonjs": "^28.0.6",
     "@rollup/plugin-node-resolve": "^15.3.1",
-    "@types/node": "^22.15.32",
-    "rollup": "^4.44.0",
+    "@types/node": "^22.18.8",
+    "rollup": "^4.52.4",
     "rollup-plugin-swc3": "^0.12.1"
   }
 }
