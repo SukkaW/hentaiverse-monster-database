@@ -20,7 +20,7 @@ After the second HentaiVerse Monster Database stopped operating, I start to rebu
 - Serverless: Operating a server could be expensive, the SLA can not be guaranteed, and also hard to maintain. With the serverless platform, we can just deploy, then forget.
 - Minimizing the cost: HentaiVerse Monster Database is designed to utilize the existing free tire/quota of the PaaS/IaaS platform.
 
-  > Currently, the website is hosted on [Cloudflare Pages](https://pages.cloudflare.com) and can be easily migrated to other static hosting platforms within minutes. The backend server is deployed on the [Vercel](https://vercel.com) and can switch to any other serverless platforms or a VPS. The data is stored in a serverless database platform [Deta](https://deta.sh) and can be easily migrated to other platforms or a self-hosted database within hours. The database dump and archive are powered by [GitHub Action](https://github.com/features/actions), and the data is stored and hosted on the [GitHub Pages](https://pages.github.com), which can easily be migrated to other git platforms, CI, and static hosting. The total cost of running the project can be reduced to $0.
+  > Currently, the website is hosted on [Cloudflare Pages](https://pages.cloudflare.com) and can be easily migrated to other static hosting platforms (like [GitHub Pages](https://pages.github.com), GitLab Pages, Netlify, etc.) within minutes. The backend server is deployed on the [Vercel](https://vercel.com) and can switch to any other serverless platforms or a VPS. The data is stored in a serverless database platform [Supabase](https://supabase.com/) and can be easily migrated to other platforms or a self-hosted database within hours. The database dump and archive are powered by [GitHub Action](https://github.com/features/actions), and the data is stored and hosted on the [GitHub Pages](https://pages.github.com), which can easily be migrated to other git platforms, CI, and static hosting. The total cost of running the project can be reduced to $0.
 
 ## Architecture
 
@@ -44,7 +44,7 @@ The project uses [webpack](https://webpack.js.org) to build and bundle the dist.
 
 [`/packages/server`](./packages/server/) holds the source code of the server that receives the scan results from the player. It is a [Node.js](https://nodejs.org/en/) application that uses [Fastify](https://www.fastify.io) as the server framework.
 
-The data is stored in a free serverless database platform [Deta](https://deta.sh). However, the server is implemented so that you can easily switch to another database provider or bring up your own database, by writing and applying your "adapter". As long as your "adapter" exposes the following methods, you can connect the server with any database:
+The data is stored in a free serverless database platform [Supabase](https://supabase.com/). However, the server is implemented so that you can easily switch to another database provider or bring up your own database, by writing and applying your "adapter". As long as your "adapter" exposes the following methods, you can connect the server with any database:
 
 ```ts
 export type GetMonsterUsingId = (monsterId: number, isIsekai: boolean) => Promise<MonsterInfo>;
@@ -60,9 +60,9 @@ export const updateMonster: UpdateMonster;
 
 ### Data Dump and Archive (data)
 
-[`/packages/data`](/packages/data/) contains two scripts: The original script that is used to import the data from the original database into the [Deta](https://deta.sh) serverless database platform. And another script is used to dump and download the entire database to a JSON file from the Deta.
+[`/packages/data`](/packages/data/) contains two scripts: The original script that is used to import the data from the original database into the [Supabase](https://supabase.com) serverless database platform. And another script is used to dump and download the entire database to a JSON file from the Supabase.
 
-The project uses [GitHub Actions](https://github.com/features/actions)' cron feature to dump the database on UTC 23:00 on a daily basis. The JSON files are then uploaded to another GitHub repository [SukkaLab/hv-monster-data](https://github.com/SukkaLab/hv-monster-data), which is eventually deployed to https://hv-monsterdb-data.skk.moe (Hosted on [GitHub Pages](https://pages.github.com/) for free).
+The project uses [GitHub Actions](https://github.com/features/actions)' cron feature to dump the database on UTC 23:00 on a daily basis. The JSON files are then uploaded to another GitHub repository [SukkaLab/hv-monster-data](https://github.com/SukkaLab/hv-monster-data), which is eventually deployed to https://hv-monsterdb-data.skk.moe (which is hosted on [GitHub Pages](https://pages.github.com/) for free).
 
 You can download the latest full database dump at:
 
@@ -147,7 +147,7 @@ Also, it is recommended to use a reverse proxy (Nginx, HAproxy, varnish) in fron
 
 #### Serverless Platform
 
-You can also deploy the backend server to the serverless platform. The source code code at the `packages/api-server-on-vercel` folder is ready to deploy on Vercel, while you can also follow [Serverless - Fastify Docs](https://www.fastify.io/docs/latest/Guides/Serverless/) to deploy the backend server to other serverless platforms.
+You can also deploy the backend server to a serverless platform. The source code code at the `packages/api-server-on-vercel` folder is ready to deploy on Vercel, while you can also follow [Serverless - Fastify Docs](https://www.fastify.io/docs/latest/Guides/Serverless/) to deploy the backend server to other serverless platforms.
 
 ### Contribute
 
