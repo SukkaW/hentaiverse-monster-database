@@ -6,10 +6,8 @@ import findUp from 'find-up';
 import * as dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
 
-// eslint-disable-next-line @typescript-eslint/no-restricted-imports -- migrate later
-import pRetry from 'p-retry';
-// eslint-disable-next-line @typescript-eslint/no-restricted-imports -- migrate later
-import type { Options as PRetryOptions } from 'p-retry';
+import { asyncRetry } from 'foxts/async-retry';
+import type { AsyncRetryOptions } from 'foxts/async-retry';
 
 if (typeof process.env.SUPABASE_PROJECT_URL !== 'string') {
   dotenv.config({ path: findUp.sync('.env') });
@@ -43,7 +41,7 @@ const isekaiWorldDB = supabase.from('Isekai');
 })();
 
 async function fetchAllRowsFrom<T = any>(table: typeof persistentWorldDB | typeof isekaiWorldDB, logTitle: string): Promise<T[]> {
-  const retryOpt: PRetryOptions = {
+  const retryOpt: AsyncRetryOptions = {
     retries: 10,
     onFailedAttempt(e) {
       console.log(`[${logTitle}]`, `Attempt ${e.attemptNumber} failed. There are ${e.retriesLeft} retries left.`);
@@ -69,7 +67,7 @@ async function fetchAllRowsFrom<T = any>(table: typeof persistentWorldDB | typeo
 
   do {
     // eslint-disable-next-line no-await-in-loop -- one by one
-    data = await pRetry(
+    data = await asyncRetry(
       fetchFrom(from),
       retryOpt
     );
