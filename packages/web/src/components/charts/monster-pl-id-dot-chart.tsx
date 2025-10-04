@@ -31,37 +31,45 @@ export default function MonsterPLIdDotChart() {
     }
 
     return (
-      <ReactEchart option={{
-        title: {
-          text: 'Monster PL - ID Scatter',
-          left: 'center',
-          top: 0
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: (param: { data: number[] }) => `ID: ${param.data[0]}, PL: ${param.data[1]}`
-        },
-        xAxis: {
-          name: 'ID',
-          max: 'dataMax'
-        },
-        yAxis: {
-          name: 'PL',
-          max: 2250,
-          min: 'dataMin'
-        },
-        series: [{
-          type: 'scatter',
-          symbolSize: 6,
-          data: dataSet,
-          animationDelay: () => Math.random() * 200
-        }]
-      }} />
+      <ReactEchart
+        option={{
+          title: {
+            text: 'Monster PL - ID Scatter',
+            left: 'center',
+            top: 0
+          },
+          tooltip: {
+            trigger: 'item',
+            formatter: (param: { data: number[] }) => `ID: ${param.data[0]}, PL: ${param.data[1]}`
+          },
+          xAxis: {
+            name: 'ID',
+            max: 'dataMax'
+          },
+          yAxis: {
+            name: 'PL',
+            max: 2250,
+            min: 'dataMin'
+          },
+          series: [{
+            type: 'scatter',
+            symbolSize: 6,
+            data: dataSet,
+            animationDelay: () => Math.random() * 200
+          }]
+        }}
+      />
     );
   }, [dataSet, isLoading]);
 }
 
 function buildDataSet(monsters?: MonsterInfo[]) {
   if (!monsters) return [];
-  return monsters.filter(monster => monster.plvl > 0).map(monster => ([monster.monsterId, monster.plvl] as const));
+
+  return monsters.reduce<Array<readonly [monsterId: number, plvl: number]>>((result, monster) => {
+    if (monster.plvl > 0) {
+      result.push([monster.monsterId, monster.plvl]);
+    }
+    return result;
+  }, []);
 }

@@ -7,7 +7,6 @@ import findUp from 'find-up';
 
 import * as dotenv from 'dotenv';
 
-// TODO
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports -- migrate later
 import pRetry from 'p-retry';
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports -- migrate later

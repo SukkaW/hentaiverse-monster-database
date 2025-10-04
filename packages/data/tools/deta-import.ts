@@ -8,6 +8,8 @@ import progress from 'cli-progress';
 import dotenv from 'dotenv';
 import findUp from 'find-up';
 
+import { chunk } from 'foxts/chunk';
+
 (async () => {
   if (typeof process.env.DETA_PROJECT_KEY !== 'string') {
     dotenv.config({ path: findUp.sync('.env') });
@@ -33,18 +35,15 @@ import findUp from 'find-up';
       speed: 'N/A'
     });
 
-    await Promise.all(persistentData.reduce((result, element, index) => {
-      const chunk = index % 500;
-      result[chunk] ??= [];
-      result[chunk].push(element);
-      return result;
-    }, []).map(async (chunk: any[]) => {
-      await persistentWorldDB.putMany(chunk.map(data => ({
-        ...data,
-        key: String(data.monsterId)
-      })));
-      bar.increment(0.2);
-    }));
+    await Promise.all(
+      chunk(persistentData, 500).map(async (chunk) => {
+        await persistentWorldDB.putMany(chunk.map(data => ({
+          ...data,
+          key: String(data.monsterId)
+        })));
+        bar.increment(0.2);
+      })
+    );
     bar.stop();
   }
   console.log('Persistent Monster Data Imorted!');
@@ -55,14 +54,9 @@ import findUp from 'find-up';
       speed: 'N/A'
     });
 
-    for (const chunk of isekaiData.reduce((result, element, index) => {
-      const chunk = index % 1000;
-      result[chunk] ??= [];
-      result[chunk].push(element);
-      return result;
-    }, [])) {
+    for (const c of chunk(isekaiData, 500)) {
       // eslint-disable-next-line no-await-in-loop -- no concurrency
-      await isekaiWorldDB.putMany(chunk.map((data: any) => ({
+      await isekaiWorldDB.putMany(c.map((data) => ({
         ...data,
         key: String(data.monsterId)
       })));

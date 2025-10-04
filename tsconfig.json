@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "references": [
+    { "path": "./packages/api-server-on-vercel" },
+    { "path": "./packages/data" },
+    { "path": "./packages/server" },
+    { "path": "./packages/types" },
+    { "path": "./packages/web" }
+  ],
+  "files": []
+}

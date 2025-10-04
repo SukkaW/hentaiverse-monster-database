@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useHasAdBlockEnabled } from '../hooks/use-detect-adblock';
 
-export const AntiAdBlock = ({ children }: React.PropsWithChildren) => {
+export function AntiAdBlock({ children }: React.PropsWithChildren) {
   const [insist, setInsist] = useState(false);
   const hasAdBlockEnabled = useHasAdBlockEnabled();
   if (!hasAdBlockEnabled) return children;
@@ -32,4 +32,4 @@ export const AntiAdBlock = ({ children }: React.PropsWithChildren) => {
       <button type="button" className="border-2 p-2 m-2 shadow-md" onClick={() => { setInsist(true); }}>I am aware the risk that site will break with my current AdBlock setup, and I insist continuing with AdBlock Enabled.</button>
     </div>
   );
-};
+}

@@ -29,31 +29,33 @@ export default function MonsterClassPieChart() {
     }
 
     return (
-      <ReactEchart option={{
-        title: {
-          text: 'Monster Class Distribution',
-          left: 'center',
-          top: 20
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: '<b>{b}</b><br>{d}% <small>({c})</small>'
-        },
-        series: [{
-          name: 'monsterClass',
-          type: 'pie',
-          radius: '50%',
-          data: dataSet.sort((a, b) => a.value - b.value),
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 20,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.4)'
-            }
+      <ReactEchart
+        option={{
+          title: {
+            text: 'Monster Class Distribution',
+            left: 'center',
+            top: 20
           },
-          animationDelay: () => Math.random() * 200
-        }]
-      }} />
+          tooltip: {
+            trigger: 'item',
+            formatter: '<b>{b}</b><br>{d}% <small>({c})</small>'
+          },
+          series: [{
+            name: 'monsterClass',
+            type: 'pie',
+            radius: '50%',
+            data: dataSet.sort((a, b) => a.value - b.value),
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 20,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.4)'
+              }
+            },
+            animationDelay: () => Math.random() * 200
+          }]
+        }}
+      />
     );
   }, [dataSet, isLoading]);
 }

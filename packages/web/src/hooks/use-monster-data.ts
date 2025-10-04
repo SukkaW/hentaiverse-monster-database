@@ -11,8 +11,16 @@ export function useMonsterData() {
     (url) => fetch(url)
       .then(r => r.json())
       .then((data: MonsterDatabase.ApiResponse) => data
-        .map((v, i) => ({ i, lastUpdate: new Date(v.lastUpdate).getTime() }))
-        .filter(i => !Number.isNaN(i.lastUpdate))
+        .reduce<Array<{ i: number, lastUpdate: number }>>((acc, cur, i) => {
+          const time = new Date(cur.lastUpdate).getTime();
+          if (Number.isNaN(time)) {
+            return acc;
+          }
+
+          acc.push({ i, lastUpdate: time });
+
+          return acc;
+        }, [])
         .sort((a, b) => b.lastUpdate - a.lastUpdate)
         .map(v => data[v.i])),
     { suspense: true }

@@ -11,9 +11,9 @@
 
 import type { FastifySchema, FastifyPluginAsync } from 'fastify';
 import type { FastifyCorsOptions } from '@fastify/cors';
-import fastifyCors from '@fastify/cors';
+import { fastifyCors } from '@fastify/cors';
 import { getMonsterDatabaseCompatibleDate, putMonsterDataToDatabase, validateMonsterDataInterface } from './util';
-import S from 'fluent-json-schema';
+import { S } from 'fluent-json-schema';
 
 const sharedResponseSchema = S.object().prop('code', S.number()).prop('msg', S.string());
 

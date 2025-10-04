@@ -32,62 +32,64 @@ export default function MonsterTrainerChart() {
     }
 
     return (
-      <ReactEchart option={{
-        title: {
-          text: 'Trainer Monster Amount Toplist',
-          left: 'center',
-          top: 0
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: '<b>{b}</b> {c}'
-        },
-        xAxis: {
-          type: 'category',
-          data: dataSet.map(({ name }) => name),
-          axisLabel: {
-            interval: 0,
-            rotate: 30
-          }
-        },
-        yAxis: {
-          show: false,
-          type: 'value'
-        },
-        dataZoom: [{
-          type: 'inside',
-          start: 0,
-          end: 20
-        }, {
-          show: true,
-          type: 'slider',
-          top: '90%',
-          xAxisIndex: [0],
-          start: 0,
-          end: 20
-        }],
-        grid: {
-          left: 100,
-          right: 100,
-          bottom: 150
-        },
-        series: [{
-          type: 'bar',
-          data: dataSet.map(({ value }) => value),
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 20,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.4)'
+      <ReactEchart
+        option={{
+          title: {
+            text: 'Trainer Monster Amount Toplist',
+            left: 'center',
+            top: 0
+          },
+          tooltip: {
+            trigger: 'item',
+            formatter: '<b>{b}</b> {c}'
+          },
+          xAxis: {
+            type: 'category',
+            data: dataSet.map(({ name }) => name),
+            axisLabel: {
+              interval: 0,
+              rotate: 30
             }
           },
-          label: {
-            position: 'top',
-            show: true
+          yAxis: {
+            show: false,
+            type: 'value'
           },
-          animationDelay: () => Math.random() * 200
-        }]
-      }} />
+          dataZoom: [{
+            type: 'inside',
+            start: 0,
+            end: 20
+          }, {
+            show: true,
+            type: 'slider',
+            top: '90%',
+            xAxisIndex: [0],
+            start: 0,
+            end: 20
+          }],
+          grid: {
+            left: 100,
+            right: 100,
+            bottom: 150
+          },
+          series: [{
+            type: 'bar',
+            data: dataSet.map(({ value }) => value),
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 20,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.4)'
+              }
+            },
+            label: {
+              position: 'top',
+              show: true
+            },
+            animationDelay: () => Math.random() * 200
+          }]
+        }}
+      />
     );
   }, [dataSet, isLoading]);
 }
@@ -99,8 +101,10 @@ function buildDataSet(monsters?: MonsterInfo[]): Array<{ name: string, value: nu
 
   const unsortedDataSet: Record<string, number> = {};
 
-  monsters.filter(monster => monster.trainer !== '').forEach(monster => {
-    unsortedDataSet[monster.trainer] = (unsortedDataSet[monster.trainer] || 0) + 1;
+  monsters.forEach(monster => {
+    if (monster.trainer !== '') {
+      unsortedDataSet[monster.trainer] = (unsortedDataSet[monster.trainer] || 0) + 1;
+    }
   });
 
   return Object.entries(unsortedDataSet).sort(([, a], [, b]) => b - a).map(([name, value]) => ({ name, value }));

@@ -1,17 +1,12 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "incremental": true,
-    "target": "es2018",
+    "target": "es2022",
     "lib": [
       "esnext"
     ],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true
+    "module": "nodenext",
+    "moduleResolution": "nodenext"
   },
   "include": [
     "index.d.ts"

@@ -1,14 +1,12 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "target": "es2018",
     "lib": ["es2022", "dom"],
     "jsx": "react-jsx",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "declaration": false,
-    "outDir": "dist",
-    "esModuleInterop": true,
-    "strict": true
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "declaration": false
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["dist", "*.d.ts", "node_modules"]

@@ -31,37 +31,39 @@ export default function MonsterScanChart() {
     }
 
     return (
-      <ReactEchart option={{
-        title: {
-          text: 'Monster Update Time Distribution',
-          left: 'center',
-          top: 20
-        },
-        tooltip: {
-          trigger: 'item'
-          // formatter: '<b>{b}</b><br>{d}% <small>({c})</small>'
-        },
-        xAxis: {
-          data: dataSet.date
-        },
-        yAxis: [
-          {
-            type: 'value'
-          }
-        ],
-        series: [{
-          type: 'bar',
-          data: dataSet.value,
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 20,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.4)'
-            }
+      <ReactEchart
+        option={{
+          title: {
+            text: 'Monster Update Time Distribution',
+            left: 'center',
+            top: 20
           },
-          animationDelay: () => Math.random() * 200
-        }]
-      }} />
+          tooltip: {
+            trigger: 'item'
+          // formatter: '<b>{b}</b><br>{d}% <small>({c})</small>'
+          },
+          xAxis: {
+            data: dataSet.date
+          },
+          yAxis: [
+            {
+              type: 'value'
+            }
+          ],
+          series: [{
+            type: 'bar',
+            data: dataSet.value,
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 20,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.4)'
+              }
+            },
+            animationDelay: () => Math.random() * 200
+          }]
+        }}
+      />
     );
   }, [dataSet, isLoading]);
 }

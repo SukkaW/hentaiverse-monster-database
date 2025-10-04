@@ -31,47 +31,49 @@ export default function MonsterPLHistogramChart() {
     }
 
     return (
-      <ReactEchart option={{
-        title: {
-          text: 'Monster PL Histogram',
-          left: 'center',
-          top: 0
-        },
-        grid: {
-          left: '5%',
-          right: '10%',
-          bottom: '10%',
-          containLabel: true
-        },
-        xAxis: {
-          type: 'value',
-          scale: true,
-          name: 'PL',
-          max: 2250
-        },
-        yAxis: {
-          type: 'value',
-          name: 'amount'
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: ({ data }: { data: Array<number | string> }) => `<b>${data[4]}</b> ${data[1]}`
-        },
-        series: [{
-          name: 'monsterClass',
-          type: 'bar',
-          barWidth: '99.5%',
-          data: dataBin,
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 20,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.4)'
-            }
+      <ReactEchart
+        option={{
+          title: {
+            text: 'Monster PL Histogram',
+            left: 'center',
+            top: 0
           },
-          animationDelay: () => Math.random() * 200
-        }]
-      }} />
+          grid: {
+            left: '5%',
+            right: '10%',
+            bottom: '10%',
+            containLabel: true
+          },
+          xAxis: {
+            type: 'value',
+            scale: true,
+            name: 'PL',
+            max: 2250
+          },
+          yAxis: {
+            type: 'value',
+            name: 'amount'
+          },
+          tooltip: {
+            trigger: 'item',
+            formatter: ({ data }: { data: Array<number | string> }) => `<b>${data[4]}</b> ${data[1]}`
+          },
+          series: [{
+            name: 'monsterClass',
+            type: 'bar',
+            barWidth: '99.5%',
+            data: dataBin,
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 20,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.4)'
+              }
+            },
+            animationDelay: () => Math.random() * 200
+          }]
+        }}
+      />
     );
   }, [dataBin, isLoading]);
 }
@@ -79,9 +81,14 @@ export default function MonsterPLHistogramChart() {
 function buildDataSet(monsters?: MonsterInfo[]) {
   if (!monsters) return [];
 
-  const plArr = monsters.filter(monster => monster.plvl > 0).map(monster => monster.plvl);
+  const plArr = monsters.reduce<number[]>((result, monster) => {
+    if (monster.plvl > 0) {
+      result.push(monster.plvl);
+    }
+    return result;
+  }, []);
 
-  const dataBin: Array<[number, number, number, number, string]> = [];
+  const dataBin: Array<[index: number, count: number, beginStep: number, endStep: number, label: string]> = [];
 
   for (let i = 0; i + 50 <= 2250; i = i + 50) {
     dataBin.push([i + 25, plArr.filter((plvl) => (plvl > i && i + 50 >= plvl)).length, i, i + 50, `${i} - ${i + 50}`]);

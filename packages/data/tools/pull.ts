@@ -86,12 +86,12 @@ async function fetchAllRowsFrom<T = any>(table: typeof persistentWorldDB | typeo
 
 function arrayStringify<T extends object>(object: T[]) {
   object.sort((a, b) => {
-    if (!(
-      'lastUpdate' in a
-      && typeof a.lastUpdate === 'string'
-      && 'lastUpdate' in b
-      && typeof b.lastUpdate === 'string'
-    )) {
+    if (
+      !('lastUpdate' in a)
+      || typeof a.lastUpdate !== 'string'
+      || !('lastUpdate' in b)
+      || typeof b.lastUpdate !== 'string'
+    ) {
       return 0;
     }
 

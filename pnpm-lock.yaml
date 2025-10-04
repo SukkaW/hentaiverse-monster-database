@@ -89,6 +89,9 @@ importers:
       find-up:
         specifier: 5.0.0
         version: 5.0.0
+      foxts:
+        specifier: ^4.0.0
+        version: 4.0.0
       p-retry:
         specifier: 4.6.2
         version: 4.6.2
@@ -2628,6 +2631,9 @@ packages:
 
   foxts@3.15.0:
     resolution: {integrity: sha512-XaSnlPKgD23NGdfuUHAX50V9h17bavUEZthg3SBO8ajT3D0pFg6KhYRvKNOlB+t7MpKZ1fj22bUPssH5PY0h4w==}
+
+  foxts@4.0.0:
+    resolution: {integrity: sha512-wrv6TDiRnNemQbtjFY+wJb+8I2sN2C4UByji+tbuzinxTpxH3Cbkjdq5awXM40eophdvR2Sw+xCcP0GwTxxkbA==}
 
   fresh@0.5.2:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
@@ -7020,6 +7026,11 @@ snapshots:
       react: 18.3.0-next-353c30252-20221202
 
   foxts@3.15.0:
+    dependencies:
+      fast-escape-html: 1.1.0
+      fast-escape-regexp: 1.0.1
+
+  foxts@4.0.0:
     dependencies:
       fast-escape-html: 1.1.0
       fast-escape-regexp: 1.0.1

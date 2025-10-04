@@ -13,14 +13,20 @@ Here is what you can do:
 
 If you don't disable your ADBlock or remove the broken filter rule, you *might and will* encounter issues.`;
 
-export const useHasAdBlockEnabled = () => {
-  const [hasEnabledAdBlock] = useState(typeof window === 'object' ? (() => {
-    try {
-      return !(typeof btoa === 'function');
-    } catch {
-      return true;
-    }
-  })() : false);
+export function useHasAdBlockEnabled() {
+  // eslint-disable-next-line @eslint-react/naming-convention/use-state -- one use
+  const [hasEnabledAdBlock] = useState(
+    typeof window === 'object'
+      ? (() => {
+        try {
+        // eslint-disable-next-line @typescript-eslint/no-deprecated -- detect adblock
+          return !(typeof btoa === 'function');
+        } catch {
+          return true;
+        }
+      })()
+      : false
+  );
 
   useLayoutEffect(() => {
     if (hasEnabledAdBlock) {
@@ -30,4 +36,4 @@ export const useHasAdBlockEnabled = () => {
   }, [hasEnabledAdBlock]);
 
   return hasEnabledAdBlock;
-};
+}

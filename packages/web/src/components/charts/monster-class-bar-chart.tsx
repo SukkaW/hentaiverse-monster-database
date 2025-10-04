@@ -30,55 +30,61 @@ export default function MonsterClassBarChart() {
     }
 
     return (
-      <ReactEchart option={{
-        title: {
-          text: 'Monster Class',
-          left: 'center',
-          top: 20
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: '<b>{b}</b> {c}'
-        },
-        yAxis: {
-          type: 'category',
-          data: dataSet.map(({ name }) => name).reverse()
-        },
-        xAxis: {
-          show: false,
-          type: 'value'
-        },
-        grid: {
-          left: 80
-        },
-        series: [{
-          type: 'bar',
-          data: dataSet.map(({ value }) => value).reverse(),
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 20,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.4)'
-            }
+      <ReactEchart
+        option={{
+          title: {
+            text: 'Monster Class',
+            left: 'center',
+            top: 20
           },
-          label: {
-            position: 'right',
-            show: true
+          tooltip: {
+            trigger: 'item',
+            formatter: '<b>{b}</b> {c}'
           },
-          animationDelay: () => Math.random() * 200
-        }]
-      }} />
+          yAxis: {
+            type: 'category',
+            data: dataSet.map(({ name }) => name).reverse()
+          },
+          xAxis: {
+            show: false,
+            type: 'value'
+          },
+          grid: {
+            left: 80
+          },
+          series: [{
+            type: 'bar',
+            data: dataSet.map(({ value }) => value).reverse(),
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 20,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.4)'
+              }
+            },
+            label: {
+              position: 'right',
+              show: true
+            },
+            animationDelay: () => Math.random() * 200
+          }]
+        }}
+      />
     );
   }, [dataSet, isLoading]);
 }
+
+const excludedMonsterClass = new Set(['Rare', 'Legendary', 'Ultimate', 'Common']);
 
 export function buildDataSet(monsters?: MonsterInfo[]): Array<{ name: string, value: number }> {
   if (!monsters) return [];
 
   const unsortedDataSet: Record<string, number> = {};
 
-  monsters.filter(monster => !['Rare', 'Legendary', 'Ultimate', 'Common'].includes(monster.monsterClass)).forEach(monster => {
-    unsortedDataSet[monster.monsterClass] = (unsortedDataSet[monster.monsterClass] || 0) + 1;
+  monsters.forEach(monster => {
+    if (!excludedMonsterClass.has(monster.monsterClass)) {
+      unsortedDataSet[monster.monsterClass] = (unsortedDataSet[monster.monsterClass] || 0) + 1;
+    }
   });
 
   const sortedDataSet = Object.keys(unsortedDataSet).sort().reduce((obj: Record<string, number>, key) => {

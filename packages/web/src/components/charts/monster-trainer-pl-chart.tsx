@@ -34,74 +34,76 @@ export default function MonsterTrainerPLChart() {
     }
 
     return (
-      <ReactEchart option={{
-        title: {
-          text: 'Trainer Monster PL Toplist',
-          left: 'center',
-          top: 0
-        },
-        dataset: [{
-          source: dataSet.trainerPls
-        }, {
-          transform: {
+      <ReactEchart
+        option={{
+          title: {
+            text: 'Trainer Monster PL Toplist',
+            left: 'center',
+            top: 0
+          },
+          dataset: [{
+            source: dataSet.trainerPls
+          }, {
+            transform: {
+              type: 'boxplot',
+              config: { itemNameFormatter: (params: { value: number }) => dataSet.trainerNames[params.value] }
+            }
+          }, {
+            fromDatasetIndex: 1,
+            fromTransformResult: 1
+          }],
+          tooltip: {
+            trigger: 'item',
+            formatter: ({ data }: { data: Array<number | string> }) => `<b>${data[0]}</b><br>Min ${data[1]}<br>Max ${data[5]}`,
+            axisPointer: {
+              type: 'shadow'
+            }
+          },
+          xAxis: {
+            name: 'Trainer',
+            type: 'category',
+            boundaryGap: true,
+            axisLabel: {
+              interval: 0,
+              rotate: 45
+            }
+          },
+          yAxis: {
+            name: 'PL',
+            max: 2250,
+            splitLine: {
+              show: true
+            }
+          },
+          dataZoom: [{
+            type: 'inside',
+            start: 0,
+            end: 20
+          }, {
+            show: true,
+            type: 'slider',
+            top: '90%',
+            xAxisIndex: [0],
+            start: 0,
+            end: 20
+          }],
+          grid: {
+            left: 100,
+            right: 100,
+            bottom: 150
+          },
+          series: [{
+            name: 'boxplot',
             type: 'boxplot',
-            config: { itemNameFormatter: (params: { value: number }) => dataSet.trainerNames[params.value] }
-          }
-        }, {
-          fromDatasetIndex: 1,
-          fromTransformResult: 1
-        }],
-        tooltip: {
-          trigger: 'item',
-          formatter: ({ data }: { data: Array<number | string> }) => `<b>${data[0]}</b><br>Min ${data[1]}<br>Max ${data[5]}`,
-          axisPointer: {
-            type: 'shadow'
-          }
-        },
-        xAxis: {
-          name: 'Trainer',
-          type: 'category',
-          boundaryGap: true,
-          axisLabel: {
-            interval: 0,
-            rotate: 45
-          }
-        },
-        yAxis: {
-          name: 'PL',
-          max: 2250,
-          splitLine: {
-            show: true
-          }
-        },
-        dataZoom: [{
-          type: 'inside',
-          start: 0,
-          end: 20
-        }, {
-          show: true,
-          type: 'slider',
-          top: '90%',
-          xAxisIndex: [0],
-          start: 0,
-          end: 20
-        }],
-        grid: {
-          left: 100,
-          right: 100,
-          bottom: 150
-        },
-        series: [{
-          name: 'boxplot',
-          type: 'boxplot',
-          datasetIndex: 1
-        }, {
-          name: 'outlier',
-          type: 'scatter',
-          symbolSize: 6,
-          datasetIndex: 2
-        }]
-      }} />
+            datasetIndex: 1
+          }, {
+            name: 'outlier',
+            type: 'scatter',
+            symbolSize: 6,
+            datasetIndex: 2
+          }]
+        }}
+      />
     );
   }, [dataSet, isLoading]);
 }
@@ -110,15 +112,16 @@ function buildDataSet(monsters?: MonsterInfo[]): {
   trainerNames: string[],
   trainerPls: number[][]
 } {
-  const trainerMonsterPlMap: Record<string, number[]> = {};
+  const trainerMonsterPlMap = monsters?.reduce<Record<string, number[]>>((result, monster) => {
+    if (monster.trainer !== '') {
+      (result[monster.trainer] ||= []).push(monster.plvl);
+    }
+    return result;
+  }, {}) ?? {};
   const unsortedDataSet: Record<string, {
     plArr: number[],
     avg: number
   }> = {};
-
-  monsters?.filter(monster => monster.trainer !== '').forEach(monster => {
-    (trainerMonsterPlMap[monster.trainer] = trainerMonsterPlMap[monster.trainer] || []).push(monster.plvl);
-  });
 
   Object.entries(trainerMonsterPlMap).forEach(([trainer, monsterPlArr]) => {
     unsortedDataSet[trainer] = {

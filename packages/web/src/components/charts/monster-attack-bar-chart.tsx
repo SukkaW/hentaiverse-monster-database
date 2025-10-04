@@ -22,7 +22,7 @@ echarts.use(
   [TitleComponent, TooltipComponent, BarChart, GridComponent, CanvasRenderer]
 );
 
-const processMonsterData = (monsters?: MonsterInfo[]): Array<{ name: string, value: number }> => {
+function processMonsterData(monsters?: MonsterInfo[]): Array<{ name: string, value: number }> {
   if (!monsters) return [];
 
   const data: Record<string, number> = {};
@@ -32,15 +32,15 @@ const processMonsterData = (monsters?: MonsterInfo[]): Array<{ name: string, val
   });
 
   return Object.keys(data).map(k => ({ name: k, value: data[k] }));
-};
+}
 
-const useProcessedMonsterData = () => {
+function useProcessedMonsterData() {
   const { monsters, isLoading } = useMonsterData();
   return {
     isLoading,
     dataSet: useMemo(() => processMonsterData(monsters), [monsters])
   };
-};
+}
 
 export default function MonsterAttackBarChart() {
   const { dataSet, isLoading } = useProcessedMonsterData();
@@ -51,50 +51,52 @@ export default function MonsterAttackBarChart() {
     }
 
     return (
-      <ReactEchart option={
-        {
-          title: {
-            text: 'Monster Attack',
-            left: 'center',
-            top: 20
-          },
-          tooltip: {
-            trigger: 'item',
-            formatter: '<b>{b}</b> {c}'
-          },
-          xAxis: {
-            type: 'category',
-            data: dataSet.map(({ name }) => name),
-            axisLabel: {
-              interval: 0,
-              rotate: 45
-            }
-          },
-          yAxis: {
-            show: false,
-            type: 'value'
-          },
-          grid: {
-            left: 80
-          },
-          series: [{
-            type: 'bar',
-            data: dataSet.map(({ value }) => value),
-            emphasis: {
-              itemStyle: {
-                shadowBlur: 20,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.4)'
+      <ReactEchart
+        option={
+          {
+            title: {
+              text: 'Monster Attack',
+              left: 'center',
+              top: 20
+            },
+            tooltip: {
+              trigger: 'item',
+              formatter: '<b>{b}</b> {c}'
+            },
+            xAxis: {
+              type: 'category',
+              data: dataSet.map(({ name }) => name),
+              axisLabel: {
+                interval: 0,
+                rotate: 45
               }
             },
-            label: {
-              position: 'top',
-              show: true
+            yAxis: {
+              show: false,
+              type: 'value'
             },
-            animationDelay: () => Math.random() * 200
-          }]
+            grid: {
+              left: 80
+            },
+            series: [{
+              type: 'bar',
+              data: dataSet.map(({ value }) => value),
+              emphasis: {
+                itemStyle: {
+                  shadowBlur: 20,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.4)'
+                }
+              },
+              label: {
+                position: 'top',
+                show: true
+              },
+              animationDelay: () => Math.random() * 200
+            }]
+          }
         }
-      } />
+      />
     );
   }, [dataSet, isLoading]);
 }

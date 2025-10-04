@@ -26,13 +26,13 @@ export function getMonsterDatabaseCompatibleDate() {
   return `${date.getUTCFullYear()}-${padNumber(date.getUTCMonth() + 1)}-${padNumber(date.getUTCDate())}`;
 }
 
-const validMonsterStatus = (prevMonsterData: MonsterInfo, newMonsterData: MonsterInfo) => (
-  prevMonsterData.monsterId === newMonsterData.monsterId
-  && prevMonsterData.monsterClass === newMonsterData.monsterClass
-  && prevMonsterData.plvl <= newMonsterData.plvl
-  && prevMonsterData.attack === newMonsterData.attack
-  && MONSTER_STATUS.every(key => prevMonsterData[key] <= newMonsterData[key])
-);
+function validMonsterStatus(prevMonsterData: MonsterInfo, newMonsterData: MonsterInfo) {
+  return prevMonsterData.monsterId === newMonsterData.monsterId
+    && prevMonsterData.monsterClass === newMonsterData.monsterClass
+    && prevMonsterData.plvl <= newMonsterData.plvl
+    && prevMonsterData.attack === newMonsterData.attack
+    && MONSTER_STATUS.every(key => prevMonsterData[key] <= newMonsterData[key]);
+}
 
 // You can replace "./adapter/deta" with your own adapter, as long
 // as it exports two methods: getMonsterUsingId and updateMonster.
