@@ -5,7 +5,7 @@
     "lib": [
       "esnext"
     ],
-    "module": "commonjs",
+    "module": "nodenext",
     "moduleResolution": "nodenext",
     "allowJs": true
   },

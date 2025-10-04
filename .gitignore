@@ -12,3 +12,4 @@ dist
 .env*
 packages/data/public/isekai.json
 packages/data/public/persistent.json
+*.tsbuildinfo

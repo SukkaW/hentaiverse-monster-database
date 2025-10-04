@@ -101,6 +101,7 @@ module.exports = /** @type {import('webpack').Configuration} */ ({
             loader: reactCompilerLoader,
             options: defineReactCompilerLoaderOption({
               // React Compiler options goes here
+              target: '18'
             })
           }
         ]
