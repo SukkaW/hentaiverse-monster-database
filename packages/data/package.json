@@ -15,8 +15,7 @@
     "cli-progress": "^3.12.0",
     "dotenv": "^17.2.3",
     "find-up": "5.0.0",
-    "foxts": "^4.0.0",
-    "p-retry": "4.6.2"
+    "foxts": "^4.1.0"
   },
   "devDependencies": {
     "@types/cli-progress": "^3.11.6",

@@ -72,11 +72,8 @@ importers:
         specifier: 5.0.0
         version: 5.0.0
       foxts:
-        specifier: ^4.0.0
-        version: 4.0.0
-      p-retry:
-        specifier: 4.6.2
-        version: 4.6.2
+        specifier: ^4.1.0
+        version: 4.1.0
     devDependencies:
       '@types/cli-progress':
         specifier: ^3.11.6
@@ -1191,9 +1188,6 @@ packages:
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
-
-  '@types/retry@0.12.0':
-    resolution: {integrity: sha512-wWKOClTTiizcZhXnPY4wikVAwmdYHp8q6DmC+EJUzAMsycb7HB32Kh9RN4+0gExjmPmZSAQjgURXIGATPegAvA==}
 
   '@types/retry@0.12.2':
     resolution: {integrity: sha512-XISRgDJ2Tc5q4TRqvgJtzsRkFYNJzZrhTdtMoGVBttwzzQJkPnS3WWTFc7kuDRoPtPakl+T+OfdEUjYJj7Jbow==}
@@ -2558,8 +2552,8 @@ packages:
   foxts@3.15.0:
     resolution: {integrity: sha512-XaSnlPKgD23NGdfuUHAX50V9h17bavUEZthg3SBO8ajT3D0pFg6KhYRvKNOlB+t7MpKZ1fj22bUPssH5PY0h4w==}
 
-  foxts@4.0.0:
-    resolution: {integrity: sha512-wrv6TDiRnNemQbtjFY+wJb+8I2sN2C4UByji+tbuzinxTpxH3Cbkjdq5awXM40eophdvR2Sw+xCcP0GwTxxkbA==}
+  foxts@4.1.0:
+    resolution: {integrity: sha512-yeJiYAI8KAoxyAQwLHHJLhcqeGGMjb1QZtF0LkrwtIDLR98ygXvQKmwr0P/raNvu/2/weJRxYfqqqeGgBsZQVQ==}
 
   fresh@0.5.2:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
@@ -3313,10 +3307,6 @@ packages:
   p-map@2.1.0:
     resolution: {integrity: sha512-y3b8Kpd8OAN444hxfBbFfj1FY/RjtTd8tzYwhUqNYXx0fXx2iX4maP4Qr6qhIKbQXI02wTLAda4fYUbDagTUFw==}
     engines: {node: '>=6'}
-
-  p-retry@4.6.2:
-    resolution: {integrity: sha512-312Id396EbJdvRONlngUx0NydfrIQ5lsYu0znKVUzVvArzEIt08V1qhtyESbGVd1FGX7UKtiFp5uwKZdM8wIuQ==}
-    engines: {node: '>=8'}
 
   p-retry@6.2.1:
     resolution: {integrity: sha512-hEt02O4hUct5wtwg4H4KcWgDdm+l1bOaEy/hWzd8xtXB9BqxTWBBhb+2ImAtH4Cv4rPjV76xN3Zumqk3k3AhhQ==}
@@ -5325,8 +5315,6 @@ snapshots:
 
   '@types/resolve@1.20.2': {}
 
-  '@types/retry@0.12.0': {}
-
   '@types/retry@0.12.2': {}
 
   '@types/send@0.17.5':
@@ -6784,7 +6772,7 @@ snapshots:
       fast-escape-html: 1.1.0
       fast-escape-regexp: 1.0.1
 
-  foxts@4.0.0:
+  foxts@4.1.0:
     dependencies:
       fast-escape-html: 1.1.0
       fast-escape-regexp: 1.0.1
@@ -7473,11 +7461,6 @@ snapshots:
       p-limit: 3.1.0
 
   p-map@2.1.0: {}
-
-  p-retry@4.6.2:
-    dependencies:
-      '@types/retry': 0.12.0
-      retry: 0.13.1
 
   p-retry@6.2.1:
     dependencies:
