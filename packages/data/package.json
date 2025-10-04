@@ -13,7 +13,6 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.58.0",
     "cli-progress": "^3.12.0",
-    "deta": "^1.2.0",
     "dotenv": "^16.6.1",
     "find-up": "5.0.0",
     "foxts": "^4.0.0",
