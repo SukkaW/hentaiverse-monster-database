@@ -20,6 +20,7 @@ const topLevelFrameworkPaths = isDevelopment ? [] : getTopLevelFrameworkPaths();
 
 module.exports = /** @type {import('webpack').Configuration} */ ({
   mode: isDevelopment ? 'development' : 'production',
+  entry: 'src/index.tsx',
   output: {
     library: '_SKK',
     filename: isDevelopment ? '[name].js' : '[contenthash].js',
