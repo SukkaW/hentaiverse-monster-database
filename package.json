@@ -13,12 +13,12 @@
   "author": "Sukka <https://skk.moe>",
   "license": "GPL-3.0",
   "devDependencies": {
-    "@eslint-sukka/node": "^7.2.1",
-    "@eslint-sukka/react": "^7.2.1",
-    "@swc/core": "^1.13.5",
-    "eslint": "^9.37.0",
-    "eslint-config-sukka": "^7.2.1",
-    "eslint-formatter-sukka": "^7.2.1",
+    "@eslint-sukka/node": "^7.3.5",
+    "@eslint-sukka/react": "^7.3.5",
+    "@swc/core": "^1.14.0",
+    "eslint": "^9.38.0",
+    "eslint-config-sukka": "^7.3.5",
+    "eslint-formatter-sukka": "^7.3.5",
     "rimraf": "^6.0.1",
     "turbo": "^2.5.8",
     "typescript": "^5.9.3"
@@ -30,7 +30,7 @@
     "buffer": false,
     "process": false
   },
-  "packageManager": "pnpm@10.18.0",
+  "packageManager": "pnpm@10.20.0",
   "pnpm": {
     "overrides": {
       "array-flatten": "npm:@nolyfill/array-flatten@^1.0.44",
@@ -39,6 +39,12 @@
       "safe-buffer": "npm:@nolyfill/safe-buffer@^1.0.44",
       "safer-buffer": "npm:@nolyfill/safer-buffer@^1.0.44",
       "side-channel": "npm:@nolyfill/side-channel@^1.0.44"
-    }
+    },
+    "ignoredBuiltDependencies": [
+      "core-js"
+    ],
+    "onlyBuiltDependencies": [
+      "@swc/core"
+    ]
   }
 }
