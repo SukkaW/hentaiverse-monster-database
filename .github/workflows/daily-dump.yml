@@ -11,14 +11,13 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version-file: .nvmrc
+          node-version-file: .node-version
           cache: "pnpm"
       - run: pnpm install
       - name: Dump Database
@@ -40,8 +39,7 @@ jobs:
           mkdir -p /tmp/public/packages/api-server-on-vercel
           echo "Last updated at $(date -u)" > /tmp/public/last-run.txt
           cp ./packages/api-server-on-vercel/should-vercel-build.sh /tmp/public/packages/api-server-on-vercel/should-vercel-build.sh
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
+      - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: /tmp/public
