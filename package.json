@@ -13,14 +13,14 @@
   "author": "Sukka <https://skk.moe>",
   "license": "GPL-3.0",
   "devDependencies": {
-    "@eslint-sukka/node": "^8.0.5",
-    "@eslint-sukka/react": "^8.0.5",
-    "@swc/core": "^1.15.3",
+    "@eslint-sukka/node": "^8.0.6",
+    "@eslint-sukka/react": "^8.0.6",
+    "@swc/core": "^1.15.8",
     "eslint": "^9.39.2",
-    "eslint-config-sukka": "^8.0.5",
-    "eslint-formatter-sukka": "^8.0.5",
+    "eslint-config-sukka": "^8.0.6",
+    "eslint-formatter-sukka": "^8.0.6",
     "rimraf": "^6.1.2",
-    "turbo": "^2.6.3",
+    "turbo": "^2.7.3",
     "typescript": "^5.9.3"
   },
   "workspaces": [
@@ -30,7 +30,7 @@
     "buffer": false,
     "process": false
   },
-  "packageManager": "pnpm@10.25.0",
+  "packageManager": "pnpm@10.27.0",
   "pnpm": {
     "overrides": {
       "array-flatten": "npm:@nolyfill/array-flatten@^1.0.44",
