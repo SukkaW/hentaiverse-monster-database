@@ -19,7 +19,7 @@
     "eslint": "^9.39.2",
     "eslint-config-sukka": "^8.6.1",
     "eslint-formatter-sukka": "^8.6.1",
-    "turbo": "^2.7.3",
+    "turbo": "^2.8.10",
     "typescript": "^5.9.3"
   },
   "workspaces": [
