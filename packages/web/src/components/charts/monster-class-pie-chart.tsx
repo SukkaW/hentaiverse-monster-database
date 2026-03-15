@@ -12,7 +12,7 @@ import {
 import {
   CanvasRenderer
 } from 'echarts/renderers';
-import { buildDataSet } from './monster-class-bar-chart';
+import { buildDataSet } from './build-data-set';
 import { useMemo } from 'react';
 
 echarts.use(

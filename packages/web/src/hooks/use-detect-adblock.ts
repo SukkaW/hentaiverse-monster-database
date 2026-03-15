@@ -14,12 +14,10 @@ Here is what you can do:
 If you don't disable your ADBlock or remove the broken filter rule, you *might and will* encounter issues.`;
 
 export function useHasAdBlockEnabled() {
-  // eslint-disable-next-line @eslint-react/naming-convention/use-state -- one use
   const [hasEnabledAdBlock] = useState(
     typeof window === 'object'
       ? (() => {
         try {
-        // eslint-disable-next-line @typescript-eslint/no-deprecated -- detect adblock
           return !(typeof btoa === 'function');
         } catch {
           return true;

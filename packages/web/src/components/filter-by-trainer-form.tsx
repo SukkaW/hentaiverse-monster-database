@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useSetTrainer, useTrainer } from './search-by-trainer-state';
 
 export function FilterByTrainerForm() {
@@ -9,7 +9,7 @@ export function FilterByTrainerForm() {
     setTrainerInputValue(e.target.value);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback<React.SubmitEventHandler<HTMLFormElement>>((event) => {
     event.preventDefault();
     setTrainerName(trainerInputValue);
     if (trainerInputValue === '') {
@@ -17,7 +17,7 @@ export function FilterByTrainerForm() {
     } else {
       window.history.pushState(null, '', `?trainer=${trainerInputValue}`);
     }
-  };
+  }, [trainerInputValue, setTrainerName]);
 
   const handleReset = () => {
     setTrainerName('');

@@ -68,8 +68,8 @@ export default function MonsterTrainerChart() {
             end: 20
           }],
           grid: {
-            left: 100,
-            right: 100,
+            left: 0,
+            right: 0,
             bottom: 150
           },
           series: [{
@@ -107,5 +107,8 @@ function buildDataSet(monsters?: MonsterInfo[]): Array<{ name: string, value: nu
     }
   });
 
-  return Object.entries(unsortedDataSet).sort(([, a], [, b]) => b - a).map(([name, value]) => ({ name, value }));
+  return Object.entries(unsortedDataSet)
+    .filter(([, value]) => value > 20)
+    .sort(([, a], [, b]) => b - a)
+    .map(([name, value]) => ({ name, value }));
 }

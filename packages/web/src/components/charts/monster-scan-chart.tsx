@@ -30,6 +30,11 @@ export default function MonsterScanChart() {
       return <div>Loading...</div>;
     }
 
+    // Calculate date from one year ago
+    const oneYearAgo = new Date();
+    oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+    const startDateStr = oneYearAgo.toISOString().split('T')[0];
+
     return (
       <ReactEchart
         option={{
@@ -43,13 +48,28 @@ export default function MonsterScanChart() {
           // formatter: '<b>{b}</b><br>{d}% <small>({c})</small>'
           },
           xAxis: {
-            data: dataSet.date
+            data: dataSet.date,
+            axisLabel: {
+              interval: Math.max(0, Math.floor(dataSet.date.length / 20))
+            }
           },
           yAxis: [
             {
               type: 'value'
             }
           ],
+          dataZoom: [{
+            type: 'inside',
+            startValue: startDateStr,
+            endValue: dataSet.date[dataSet.date.length - 1]
+          }, {
+            show: true,
+            type: 'slider',
+            top: '90%',
+            xAxisIndex: [0],
+            startValue: startDateStr,
+            endValue: dataSet.date[dataSet.date.length - 1]
+          }],
           series: [{
             type: 'bar',
             data: dataSet.value,
@@ -61,7 +81,12 @@ export default function MonsterScanChart() {
               }
             },
             animationDelay: () => Math.random() * 200
-          }]
+          }],
+          grid: {
+            left: 0,
+            right: 0,
+            containLabel: true
+          }
         }}
       />
     );
@@ -69,23 +94,30 @@ export default function MonsterScanChart() {
 }
 
 function buildDataSet(monsters?: MonsterInfo[]): { date: string[], value: number[] } {
-  const unsortedDataSet: Record<string, number> = {};
+  if (!monsters?.length) {
+    return { date: [], value: [] };
+  }
 
-  monsters?.forEach((monster) => {
-    const date = new Date(monster.lastUpdate);
-    const kDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-    unsortedDataSet[kDate] = (unsortedDataSet[kDate] || 0) + 1;
-  });
+  // Aggregate monsters by date (YYYY-MM-DD format)
+  const dateCountMap = monsters.reduce<Record<string, number>>((acc, monster) => {
+    const dateStr = new Date(monster.lastUpdate).toISOString().split('T')[0];
+    acc[dateStr] = (acc[dateStr] || 0) + 1;
+    return acc;
+  }, {});
 
-  const sortedDataSet = Object.keys(unsortedDataSet)
-    .sort((a, b) => new Date(a).getTime() - new Date(b).getTime())
-    .reduce((obj: Record<string, number>, key) => {
-      obj[key] = unsortedDataSet[key];
-      return obj;
-    }, {});
+  // Generate continuous date range filling in missing days with 0
+  const sortedDates = Object.keys(dateCountMap).sort();
+  const startDate = new Date(sortedDates[0]);
+  const endDate = new Date(sortedDates[sortedDates.length - 1]);
 
-  const date: string[] = Object.keys(sortedDataSet);
-  const value: number[] = Object.values(sortedDataSet);
+  const result: Record<string, number> = {};
+  for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+    const dateStr = d.toISOString().split('T')[0];
+    result[dateStr] = dateCountMap[dateStr] ?? 0;
+  }
+
+  const date = Object.keys(result);
+  const value = Object.values(result);
 
   return { date, value };
 }

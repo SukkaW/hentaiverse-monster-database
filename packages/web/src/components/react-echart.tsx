@@ -1,12 +1,13 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useRef } from 'react';
+import { useEffect } from 'foxact/use-abortable-effect';
 import * as echarts from 'echarts/core';
 import type { ECBasicOption } from 'echarts/types/dist/shared';
 
 export function ReactEchart(props: { option: ECBasicOption }) {
-  const echartInstanceRef = useRef<echarts.ECharts>();
+  const echartInstanceRef = useRef<echarts.ECharts>(null);
   const { option } = props;
 
-  const echarCallbackRef = useCallback((el: HTMLDivElement | null) => {
+  const echarCallbackRef = useCallback<React.RefCallback<HTMLDivElement>>((el) => {
     if (el) {
       // element is mounted
       echartInstanceRef.current = echarts.init(el);
@@ -14,8 +15,19 @@ export function ReactEchart(props: { option: ECBasicOption }) {
     if (!el) {
       // element is unmounted
       echartInstanceRef.current?.dispose();
-      echartInstanceRef.current = undefined;
+      echartInstanceRef.current = null;
     }
+  }, []);
+
+  useEffect(() => {
+    function resizeEchart() {
+      echartInstanceRef.current?.resize();
+    }
+    window.addEventListener('resize', resizeEchart);
+
+    return () => {
+      window.removeEventListener('resize', resizeEchart);
+    };
   }, []);
 
   useEffect(() => {

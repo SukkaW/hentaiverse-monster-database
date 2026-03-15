@@ -1,4 +1,5 @@
 import { Grid } from 'gridjs';
+import type { Config as GridjsConfig } from 'gridjs';
 import { useMonsterData } from '../hooks/use-monster-data';
 import type { MonsterInfo } from '@hvmonsterdb/types';
 
@@ -6,6 +7,7 @@ import 'gridjs/dist/theme/mermaid.css';
 import '../css/overwrite-gridjs.css';
 import { useEffect, useMemo, useRef } from 'react';
 import { useTrainer } from './search-by-trainer-state';
+import { useSingleton } from 'foxact/use-singleton';
 
 type DataTablesTColumn = Tuple<{
   name: string,
@@ -105,36 +107,31 @@ export function MonsterDataTable() {
     return [];
   }, [rawMonsterDatas, trainerName]);
 
-  const gridjsOption = useMemo(() => ({
-    columns,
-    data,
-    search: true,
-    sort: true,
-    pagination: {
-      enabled: true,
-      limit: 20
-    }
-  }), [data]);
-
+  // eslint-disable-next-line @eslint-react/no-unnecessary-use-ref -- across render tracking
   const isFirstRenderRef = useRef(true);
-  const gridInstance = useRef<Grid>();
+  const gridInstance = useSingleton(() => new Grid(makeGridjsOption(data)));
 
   useEffect(() => {
-    if (!isLoading) {
-      if (!gridInstance.current) {
-        gridInstance.current = new Grid(gridjsOption);
+    const gridOption = {
+      columns,
+      data,
+      search: true,
+      sort: true,
+      pagination: {
+        enabled: true,
+        limit: 20
       }
+    };
 
-      if (elementRef.current) {
-        if (isFirstRenderRef.current) {
-          isFirstRenderRef.current = false;
-          gridInstance.current.render(elementRef.current);
-        } else {
-          gridInstance.current.updateConfig(gridjsOption).forceRender();
-        }
+    if (!isLoading && elementRef.current) {
+      if (isFirstRenderRef.current) {
+        isFirstRenderRef.current = false;
+        gridInstance.current.render(elementRef.current);
+      } else {
+        gridInstance.current.updateConfig(gridOption).forceRender();
       }
     }
-  }, [isLoading, gridjsOption]);
+  }, [isLoading, data, gridInstance]);
 
   if (isLoading) {
     return <div className="mt-12 text-lg text-center">Loading...</div>;
@@ -143,4 +140,16 @@ export function MonsterDataTable() {
   return (
     <div className="text-sm" ref={elementRef} />
   );
+}
+
+function makeGridjsOption(data: Array<Tuple<string | number, 16>>): Partial<GridjsConfig> {
+  return {
+    columns,
+    data,
+    search: true,
+    sort: true,
+    pagination: {
+      limit: 20
+    }
+  };
 }

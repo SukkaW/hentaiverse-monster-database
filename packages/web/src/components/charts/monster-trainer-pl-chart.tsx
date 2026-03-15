@@ -88,8 +88,8 @@ export default function MonsterTrainerPLChart() {
             end: 20
           }],
           grid: {
-            left: 100,
-            right: 100,
+            left: 0,
+            right: 0,
             bottom: 150
           },
           series: [{
@@ -130,7 +130,9 @@ function buildDataSet(monsters?: MonsterInfo[]): {
     };
   });
 
-  const sortedDataSet = Object.entries(unsortedDataSet).sort(([, { avg: avg1 }], [, { avg: avg2 }]) => avg2 - avg1);
+  const sortedDataSet = Object.entries(unsortedDataSet)
+    .filter(([, { plArr }]) => plArr.length > 20)
+    .sort(([, { avg: avg1 }], [, { avg: avg2 }]) => avg2 - avg1);
 
   const trainerNames = sortedDataSet.map(([name]) => name);
   const trainerPls = sortedDataSet.map(([, { plArr }]) => plArr);
