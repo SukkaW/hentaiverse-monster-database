@@ -1,7 +1,7 @@
 import process from 'node:process';
 import fsp from 'node:fs/promises';
 import path from 'node:path';
-import findUp from 'find-up';
+import * as find from 'empathic/find';
 
 import * as dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
@@ -10,7 +10,7 @@ import { asyncRetry } from 'foxts/async-retry';
 import type { AsyncRetryOptions } from 'foxts/async-retry';
 
 if (typeof process.env.SUPABASE_PROJECT_URL !== 'string') {
-  dotenv.config({ path: findUp.sync('.env') });
+  dotenv.config({ path: find.up('.env') });
 }
 
 if (

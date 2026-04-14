@@ -1,7 +1,7 @@
 import process from 'node:process';
 
 import * as dotenv from 'dotenv';
-import findUp from 'find-up';
+import * as find from 'empathic/find';
 import Fastify from 'fastify';
 
 import { app } from './app';
@@ -11,7 +11,7 @@ import { app } from './app';
  */
 
 if (typeof process.env.SUPABASE_PROJECT_URL !== 'string') {
-  dotenv.config({ path: findUp.sync('.env') });
+  dotenv.config({ path: find.up('.env') });
 }
 
 if (

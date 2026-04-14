@@ -3,10 +3,10 @@ import process from 'node:process';
 import fsp from 'node:fs/promises';
 import path from 'node:path';
 import dotenv from 'dotenv';
-import findUp from 'find-up';
+import * as find from 'empathic/find';
 
 if (typeof process.env.SUPABASE_PROJECT_URL !== 'string') {
-  dotenv.config({ path: findUp.sync('.env') });
+  dotenv.config({ path: find.up('.env') });
 }
 
 (async () => {
