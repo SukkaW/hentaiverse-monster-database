@@ -14,7 +14,7 @@ const supabase = createClient(process.env.SUPABASE_PROJECT_URL, process.env.SUPA
 
 export const getMonsterUsingId: GetMonsterUsingId = async (monsterId: number, isIsekai: boolean): Promise<MonsterInfo | null> => {
   const db = supabase.from(isIsekai ? 'Isekai' : 'Persistent');
-  const { data, error } = await db.select('*').eq('monsterId', monsterId).limit(1).single();
+  const { data, error } = await db.select('*').eq('monsterId', monsterId).limit(1).maybeSingle();
   if (error) {
     console.error(error);
     return null;
