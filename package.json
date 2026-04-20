@@ -13,14 +13,14 @@
   "author": "Sukka <https://skk.moe>",
   "license": "GPL-3.0",
   "devDependencies": {
-    "@eslint-sukka/node": "^8.9.2",
-    "@eslint-sukka/react": "^8.9.2",
-    "@swc/core": "^1.15.24",
-    "eslint": "^10.2.0",
+    "@eslint-sukka/node": "^8.9.3",
+    "@eslint-sukka/react": "^8.9.3",
+    "@swc/core": "^1.15.30",
+    "eslint": "^10.2.1",
     "eslint-config-sukka": "^8.9.2",
-    "eslint-formatter-sukka": "^8.9.2",
+    "eslint-formatter-sukka": "^8.9.3",
     "turbo": "^2.9.6",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.3"
   },
   "workspaces": [
     "packages/*"
