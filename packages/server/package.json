@@ -11,18 +11,18 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@fastify/cors": "^11.2.0",
-    "@supabase/supabase-js": "^2.103.0",
+    "@supabase/supabase-js": "^2.105.4",
     "dotenv": "^17.4.2",
-    "empathic": "^2.0.0",
-    "fastify": "^5.8.4",
+    "empathic": "^2.0.1",
+    "fastify": "^5.8.5",
     "fluent-json-schema": "^6.0.0"
   },
   "devDependencies": {
     "@hvmonsterdb/types": "workspace:*",
     "@rollup/plugin-commonjs": "^28.0.9",
     "@rollup/plugin-node-resolve": "^16.0.3",
-    "@types/node": "^22.19.17",
-    "rollup": "^4.60.1",
+    "@types/node": "^22.19.19",
+    "rollup": "^4.60.3",
     "rollup-plugin-swc3": "^0.12.1"
   }
 }

@@ -11,15 +11,15 @@
   "author": "Sukka <https://skk.moe>",
   "license": "GPL-3.0",
   "dependencies": {
-    "@supabase/supabase-js": "^2.103.0",
+    "@supabase/supabase-js": "^2.105.4",
     "cli-progress": "^3.12.0",
     "dotenv": "^17.4.2",
-    "empathic": "^2.0.0",
-    "foxts": "^5.4.0"
+    "empathic": "^2.0.1",
+    "foxts": "^5.4.2"
   },
   "devDependencies": {
     "@types/cli-progress": "^3.11.6",
-    "@types/node": "^22.19.17",
+    "@types/node": "^22.19.19",
     "ts-node": "^10.9.2"
   },
   "engines": {

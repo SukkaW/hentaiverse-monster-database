@@ -15,17 +15,17 @@
     "@headlessui/react": "^1.7.19",
     "clsx": "^2.1.1",
     "echarts": "^6.0.0",
-    "foxact": "^0.3.0",
+    "foxact": "^0.3.1",
     "gridjs": "^6.2.0",
-    "react": "^18.3.1",
+    "react": "^19.2.6",
     "react-compiler-runtime": "^19.1.0-rc.3",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.2.6",
     "swr": "^2.4.1"
   },
   "devDependencies": {
     "@hvmonsterdb/types": "workspace:*",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.2",
-    "@swc/core": "^1.15.24",
+    "@swc/core": "^1.15.33",
     "@swc/helpers": "^0.5.21",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
@@ -34,9 +34,9 @@
     "postcss-loader": "^8.2.1",
     "tailpack": "^0.1.0-beta.3",
     "tailwindcss": "^3.4.19",
-    "webpack": "^5.106.1",
+    "webpack": "^5.106.2",
     "webpack-cli": "^7.0.2",
-    "webpack-dev-server": "^5.2.3",
+    "webpack-dev-server": "^5.2.4",
     "webpackbar": "^7.0.0"
   }
 }
