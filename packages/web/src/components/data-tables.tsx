@@ -107,7 +107,6 @@ export function MonsterDataTable() {
     return [];
   }, [rawMonsterDatas, trainerName]);
 
-  // eslint-disable-next-line @eslint-react/no-unnecessary-use-ref -- across render tracking
   const isFirstRenderRef = useRef(true);
   const gridInstance = useSingleton(() => new Grid(makeGridjsOption(data)));
 

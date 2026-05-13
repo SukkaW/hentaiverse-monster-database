@@ -1,4 +1,5 @@
 import { useEffect, StrictMode } from 'react';
+import { Theme } from '@radix-ui/themes';
 
 import { IsekaiProvider } from './components/isekai-state';
 import { useHasAdBlockEnabled } from './hooks/use-detect-adblock';
@@ -16,11 +17,13 @@ export function App() {
 
   return (
     <StrictMode>
-      <IsekaiProvider>
-        <SearchByTrainerProvider>
-          <MainEntry />
-        </SearchByTrainerProvider>
-      </IsekaiProvider>
+      <Theme accentColor="amber" grayColor="sand" radius="large">
+        <IsekaiProvider>
+          <SearchByTrainerProvider>
+            <MainEntry />
+          </SearchByTrainerProvider>
+        </IsekaiProvider>
+      </Theme>
     </StrictMode>
   );
 }

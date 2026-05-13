@@ -12,7 +12,7 @@
   "author": "Sukka <https://skk.moe>",
   "license": "GPL-3.0",
   "dependencies": {
-    "@headlessui/react": "^1.7.19",
+    "@radix-ui/themes": "^3.2.1",
     "clsx": "^2.1.1",
     "echarts": "^6.0.0",
     "foxact": "^0.3.1",

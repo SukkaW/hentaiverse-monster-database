@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import { App } from './app';
 
+import '@radix-ui/themes/styles.css';
 import './index.css';
 
 const app = document.getElementById('app');
