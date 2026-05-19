@@ -4,8 +4,8 @@
   "private": true,
   "description": "",
   "scripts": {
-    "pull": "ts-node tools/pull.ts",
-    "import": "ts-node tools/import.ts"
+    "pull": "SWC_NODE_IGNORE_DYNAMIC=true node -r @swc-node/register tools/pull.ts",
+    "import": "SWC_NODE_IGNORE_DYNAMIC=true node -r @swc-node/register tools/import.ts"
   },
   "keywords": [],
   "author": "Sukka <https://skk.moe>",
@@ -18,9 +18,9 @@
     "foxts": "^5.4.2"
   },
   "devDependencies": {
+    "@swc-node/register": "^1.11.1",
     "@types/cli-progress": "^3.11.6",
-    "@types/node": "^22.19.19",
-    "ts-node": "^10.9.2"
+    "@types/node": "^22.19.19"
   },
   "engines": {
     "node": ">=18.0.0"
