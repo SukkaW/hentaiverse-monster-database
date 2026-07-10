@@ -7,6 +7,7 @@
     "build": "turbo run build",
     "test": "turbo run test",
     "lint": "eslint --format=sukka .",
+    "typecheck": "tsc --build --noEmit",
     "dev": "turbo run dev"
   },
   "keywords": [],

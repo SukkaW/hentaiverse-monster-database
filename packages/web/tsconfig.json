@@ -5,8 +5,7 @@
     "lib": ["es2022", "dom"],
     "jsx": "react-jsx",
     "module": "preserve",
-    "moduleResolution": "bundler",
-    "declaration": false
+    "moduleResolution": "bundler"
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["dist", "*.d.ts", "node_modules"]

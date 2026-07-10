@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "incremental": true,
+    "composite": true,
+    "tsBuildInfoFile": "${configDir}/node_modules/.cache/tsconfig.tsbuildinfo",
     "resolveJsonModule": true,
     "noEmit": true,
     "esModuleInterop": true,
