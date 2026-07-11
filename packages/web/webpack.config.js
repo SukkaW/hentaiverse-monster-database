@@ -4,7 +4,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 
 module.exports = require('tailpack').reactSpa({
   cwd: __dirname,
-  entry: 'src/index.tsx',
+  entry: './src/index.tsx',
   output: {
     library: '_SKK',
     path: path.resolve(__dirname, 'dist'),
