@@ -13,12 +13,21 @@ jobs:
   build:
     runs-on: ubuntu-slim
     steps:
-      - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v4
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        id: setup_pnpm
+        background: true
+        with:
+          run_install: false
+          cache: true
       - uses: actions/setup-node@v6
+        id: setup_node
+        background: true
         with:
           node-version-file: .node-version
-          cache: "pnpm"
+          package-manager-cache: false
+      - wait: [setup_pnpm, setup_node]
+      - run: pnpm config set --location=global minimumReleaseAge 0
       - run: pnpm install
       - name: Dump Database
         run: pnpm --filter=data run pull
