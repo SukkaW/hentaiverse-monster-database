@@ -19,15 +19,11 @@ export function ReactEchart(props: { option: ECBasicOption }) {
     }
   }, []);
 
-  useEffect(() => {
+  useEffect((signal) => {
     function resizeEchart() {
       echartInstanceRef.current?.resize();
     }
-    window.addEventListener('resize', resizeEchart);
-
-    return () => {
-      window.removeEventListener('resize', resizeEchart);
-    };
+    window.addEventListener('resize', resizeEchart, { signal });
   }, []);
 
   useEffect(() => {

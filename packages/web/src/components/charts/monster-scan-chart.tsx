@@ -33,7 +33,7 @@ export default function MonsterScanChart() {
     // Calculate date from one year ago
     const oneYearAgo = new Date();
     oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-    const startDateStr = oneYearAgo.toISOString().split('T')[0];
+    const startDateStr = oneYearAgo.toISOString().split('T', 1)[0];
 
     return (
       <ReactEchart
@@ -100,7 +100,7 @@ function buildDataSet(monsters?: MonsterInfo[]): { date: string[], value: number
 
   // Aggregate monsters by date (YYYY-MM-DD format)
   const dateCountMap = monsters.reduce<Record<string, number>>((acc, monster) => {
-    const dateStr = new Date(monster.lastUpdate).toISOString().split('T')[0];
+    const dateStr = new Date(monster.lastUpdate).toISOString().split('T', 1)[0];
     acc[dateStr] = (acc[dateStr] || 0) + 1;
     return acc;
   }, {});
@@ -112,7 +112,7 @@ function buildDataSet(monsters?: MonsterInfo[]): { date: string[], value: number
 
   const result: Record<string, number> = {};
   for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-    const dateStr = d.toISOString().split('T')[0];
+    const dateStr = d.toISOString().split('T', 1)[0];
     result[dateStr] = dateCountMap[dateStr] ?? 0;
   }
 

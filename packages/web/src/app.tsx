@@ -4,7 +4,6 @@ import { Theme } from '@radix-ui/themes';
 import { IsekaiProvider } from './components/isekai-state';
 import { useHasAdBlockEnabled } from './hooks/use-detect-adblock';
 import MainEntry from './main';
-import { SearchByTrainerProvider } from './components/search-by-trainer-state';
 
 export function App() {
   useEffect(() => {
@@ -19,9 +18,7 @@ export function App() {
     <StrictMode>
       <Theme accentColor="amber" grayColor="sand" radius="large">
         <IsekaiProvider>
-          <SearchByTrainerProvider>
-            <MainEntry />
-          </SearchByTrainerProvider>
+          <MainEntry />
         </IsekaiProvider>
       </Theme>
     </StrictMode>

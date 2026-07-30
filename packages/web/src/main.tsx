@@ -5,10 +5,9 @@ import { Row, Col } from './components/row-col';
 import { AntiAdBlock } from './components/anti-adblock';
 import { Box, Tabs } from '@radix-ui/themes';
 
-import { Suspense, lazy, useEffect } from 'react';
+import { Suspense, lazy } from 'react';
 import { useIsIsekai } from './components/isekai-state';
 import type { MonsterDatabase } from './types';
-import { useSetTrainer } from './components/search-by-trainer-state';
 
 const MonsterAttackBarChart = lazy(() => import('./components/charts/monster-attack-bar-chart'));
 const MonsterClassBarChart = lazy(() => import('./components/charts/monster-class-bar-chart'));
@@ -22,21 +21,13 @@ const MonsterMitigationChart = lazy(() => import('./components/charts/monster-mi
 
 const elementsGroup = (['fire', 'cold', 'wind', 'elec', 'dark', 'holy'] as const).reduce<MonsterDatabase.Element[][]>((result, element, index) => {
   const chunk = Math.floor(index / 2);
-  result[chunk] = result[chunk] ?? [];
+  result[chunk] ??= [];
   result[chunk].push(element);
   return result;
 }, []);
 
 export default function MainEntry() {
   const isIsekai = useIsIsekai();
-  const setTrainerName = useSetTrainer();
-
-  useEffect(() => {
-    const trainerUrlQuery = (new URL(window.location.href)).searchParams.get('trainer');
-    if (trainerUrlQuery) {
-      setTrainerName(trainerUrlQuery);
-    }
-  }, [setTrainerName]);
 
   return (
     <main className="p-8">

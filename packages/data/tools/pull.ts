@@ -8,6 +8,7 @@ import { createClient } from '@supabase/supabase-js';
 
 import { asyncRetry } from 'foxts/async-retry';
 import type { AsyncRetryOptions } from 'foxts/async-retry';
+import { appendArrayInPlace } from 'foxts/append-array-in-place';
 
 if (typeof process.env.SUPABASE_PROJECT_URL !== 'string') {
   dotenv.config({ path: find.up('.env') });
@@ -48,7 +49,7 @@ async function fetchAllRowsFrom<T = any>(table: typeof persistentWorldDB | typeo
     }
   };
 
-  let allData: T[] = [];
+  const allData: T[] = [];
   let from = 0;
   const pageSize = 800; // Adjust the page size if necessary
   let data: T[];
@@ -73,7 +74,7 @@ async function fetchAllRowsFrom<T = any>(table: typeof persistentWorldDB | typeo
     );
 
     // Add the fetched data to the result set
-    allData = allData.concat(data);
+    appendArrayInPlace(allData, data);
     console.log(`[${logTitle}]`, allData.length, 'fetched!');
 
     from += pageSize;

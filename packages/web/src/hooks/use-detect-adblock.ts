@@ -14,24 +14,24 @@ Here is what you can do:
 If you don't disable your ADBlock or remove the broken filter rule, you *might and will* encounter issues.`;
 
 export function useHasAdBlockEnabled() {
-  const [hasEnabledAdBlock] = useState(
-    typeof window === 'object'
-      ? (() => {
-        try {
-          return !(typeof btoa === 'function');
-        } catch {
-          return true;
-        }
-      })()
-      : false
-  );
+  const [hasEnabledAdBlock, setHasEnabledAdBlock] = useState(false);
 
   useLayoutEffect(() => {
-    if (hasEnabledAdBlock) {
+    let check = false;
+
+    try {
+      check = !(typeof btoa === 'function');
+    } catch {
+      check = true;
+    }
+
+    // eslint-disable-next-line @eslint-react/set-state-in-effect, sukka/react-no-use-effect-watching -- adblock detection
+    setHasEnabledAdBlock(check);
+    if (check) {
       // eslint-disable-next-line no-alert -- warning
       alert(alertMsg);
     }
-  }, [hasEnabledAdBlock]);
+  }, []);
 
   return hasEnabledAdBlock;
 }

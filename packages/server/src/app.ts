@@ -28,6 +28,7 @@ const ALLOWED_REFERERS = [
   'hentaiverse.org',
   'alt.hentaiverse.org'
 ];
+const ALLOWED_REFERERS_SET = new Set(ALLOWED_REFERERS);
 
 const fastifyCorsOption: FastifyCorsOptions = {
   origin: ALLOWED_REFERERS.map(host => `https://${host}`),
@@ -51,7 +52,7 @@ export const app: FastifyPluginAsync = (fastify) => {
       }
 
       try {
-        if (request.headers.referer && ALLOWED_REFERERS.includes(new URL(request.headers.referer).hostname)) {
+        if (request.headers.referer && ALLOWED_REFERERS_SET.has(new URL(request.headers.referer).hostname)) {
           const data = typeof request.body === 'string' ? JSON.parse(request.body) : request.body;
 
           if (validateMonsterDataInterface(data)) {

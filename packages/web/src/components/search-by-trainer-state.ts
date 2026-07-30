@@ -1,5 +1,12 @@
-import { createContextState } from 'foxact/context-state';
+import { unstable_useUrlHashState as useUrlHashState } from 'foxact/use-url-hash-state';
 
-const [SearchByTrainerProvider, useTrainer, useSetTrainer] = createContextState('');
+function useTrainerState() {
+  const [trainerName, setTrainerName] = useUrlHashState('trainer', '', { raw: true });
+  return [trainerName ?? '', setTrainerName] as const;
+}
 
-export { SearchByTrainerProvider, useTrainer, useSetTrainer };
+function useTrainer() {
+  return useTrainerState()[0];
+}
+
+export { useTrainer, useTrainerState };
