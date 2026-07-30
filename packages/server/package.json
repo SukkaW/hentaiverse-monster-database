@@ -11,7 +11,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@fastify/cors": "^11.3.0",
-    "@supabase/supabase-js": "^2.110.2",
+    "@supabase/supabase-js": "^2.111.0",
     "dotenv": "^17.4.2",
     "empathic": "^2.0.1",
     "fastify": "^5.10.0",
@@ -22,7 +22,7 @@
     "@rollup/plugin-commonjs": "^28.0.9",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@types/node": "^22.20.1",
-    "rollup": "^4.62.2",
+    "rollup": "^4.62.3",
     "rollup-plugin-swc3": "^0.12.1"
   }
 }
