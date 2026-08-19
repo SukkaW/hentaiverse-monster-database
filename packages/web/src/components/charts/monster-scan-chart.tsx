@@ -16,6 +16,7 @@ import {
   CanvasRenderer
 } from 'echarts/renderers';
 import { useMemo } from 'react';
+import { split0th } from 'foxts/split-nth';
 
 echarts.use(
   [TitleComponent, TooltipComponent, GridComponent, BarChart, CanvasRenderer]
@@ -33,7 +34,7 @@ export default function MonsterScanChart() {
     // Calculate date from one year ago
     const oneYearAgo = new Date();
     oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-    const startDateStr = oneYearAgo.toISOString().split('T', 1)[0];
+    const startDateStr = split0th(oneYearAgo.toISOString(), 'T');
 
     return (
       <ReactEchart
@@ -61,14 +62,14 @@ export default function MonsterScanChart() {
           dataZoom: [{
             type: 'inside',
             startValue: startDateStr,
-            endValue: dataSet.date[dataSet.date.length - 1]
+            endValue: dataSet.date.at(-1)
           }, {
             show: true,
             type: 'slider',
             top: '90%',
             xAxisIndex: [0],
             startValue: startDateStr,
-            endValue: dataSet.date[dataSet.date.length - 1]
+            endValue: dataSet.date.at(-1)
           }],
           series: [{
             type: 'bar',
@@ -100,7 +101,7 @@ function buildDataSet(monsters?: MonsterInfo[]): { date: string[], value: number
 
   // Aggregate monsters by date (YYYY-MM-DD format)
   const dateCountMap = monsters.reduce<Record<string, number>>((acc, monster) => {
-    const dateStr = new Date(monster.lastUpdate).toISOString().split('T', 1)[0];
+    const dateStr = split0th(new Date(monster.lastUpdate).toISOString(), 'T');
     acc[dateStr] = (acc[dateStr] || 0) + 1;
     return acc;
   }, {});
@@ -108,11 +109,11 @@ function buildDataSet(monsters?: MonsterInfo[]): { date: string[], value: number
   // Generate continuous date range filling in missing days with 0
   const sortedDates = Object.keys(dateCountMap).sort();
   const startDate = new Date(sortedDates[0]);
-  const endDate = new Date(sortedDates[sortedDates.length - 1]);
+  const endDate = new Date(sortedDates.at(-1)!);
 
   const result: Record<string, number> = {};
   for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-    const dateStr = d.toISOString().split('T', 1)[0];
+    const dateStr = split0th(d.toISOString(), 'T');
     result[dateStr] = dateCountMap[dateStr] ?? 0;
   }
 

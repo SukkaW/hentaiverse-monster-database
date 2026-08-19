@@ -1,9 +1,5 @@
-ignoredBuiltDependencies:
-  - core-js
-onlyBuiltDependencies:
-  - '@swc/core'
 packages:
-  - 'packages/*'
+  - "packages/*"
 overrides:
   array-flatten: npm:@nolyfill/array-flatten@^1.0.44
   is-core-module: npm:@nolyfill/is-core-module@^1.0.39
@@ -11,3 +7,9 @@ overrides:
   safe-buffer: npm:@nolyfill/safe-buffer@^1.0.44
   safer-buffer: npm:@nolyfill/safer-buffer@^1.0.44
   side-channel: npm:@nolyfill/side-channel@^1.0.44
+allowBuilds:
+  "@swc/core": true
+  core-js: false
+  core-js-pure: false
+  esbuild: true
+  unrs-resolver: true

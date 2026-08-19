@@ -25,7 +25,7 @@ export function useHasAdBlockEnabled() {
       check = true;
     }
 
-    // eslint-disable-next-line @eslint-react/set-state-in-effect, sukka/react-no-use-effect-watching -- adblock detection
+    // eslint-disable-next-line @eslint-react/set-state-in-effect, vibe-proof/react-no-use-effect-watching -- adblock detection
     setHasEnabledAdBlock(check);
     if (check) {
       // eslint-disable-next-line no-alert -- warning
