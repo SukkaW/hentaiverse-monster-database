@@ -14,11 +14,11 @@ jobs:
     runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@v7
-      - uses: pnpm/action-setup@v6
+      - uses: pnpm/setup@v2
         id: setup_pnpm
         background: true
         with:
-          run_install: false
+          install: false
           cache: true
       - uses: actions/setup-node@v6
         id: setup_node
